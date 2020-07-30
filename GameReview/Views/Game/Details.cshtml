@@ -1,0 +1,204 @@
+﻿@model  GameReview.Models.Game
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row contentDivider"></div>
+
+<div class="row" id="gameInfoRow">
+
+
+    <div class="col-lg-6" id="mobileGameTitle">
+        <!--disappears on desktops and up-->
+        <h1 class="text-center" class="pinkUnderline">@Model.Name</h1>
+    </div>
+
+    <div class="col-lg-3 text-center order-lg-1" id="coverColumn">
+        <img src="@Model.CoverArtUrl" class="img-fluid" id="gameCoverImg" />
+
+        <div>
+            <h5 id="ageRating" class="text-center">@Model.AgeRatingImageUrl</h5>
+        </div>
+    </div>
+
+    <div class="line notDesktop"></div>
+
+    <div class="col-lg-6 order-lg-2">
+        <div class="row" id="titleRow">
+            <h1 class="gameTitle fontFam pinkUnderline" id="desktopGameTitle">@Model.Name</h1> <!--Only shows on desktops and up-->
+        </div>
+
+        <div class="fontFam">
+            <p class="bottomBorderGrey"><span>Release Date: </span> @Model.FirstReleaseDate.ToShortDateString()</p>
+            <p class="bottomBorderGrey">
+                <span>Involved Companies: </span>
+                @foreach (var company in Model.InvolvedCompanies)
+                {
+                    @Html.Raw(company)
+
+                    if (company == Model.InvolvedCompanies.Last())
+                    {
+                    }
+                    else
+                    {
+                        @(", ")
+                    }
+                }
+            </p>
+            <p class="bottomBorderGrey">
+                <span>Platforms: </span>
+                @foreach (var platform in Model.Platforms)
+                {
+                    @Html.Raw(platform)
+
+                    if (platform == Model.Platforms.Last())
+                    {
+                    }
+                    else
+                    {
+                        @(", ")
+                    }
+                }
+            </p>
+            <p class="bottomBorderGrey"><span>Websites: </span>@Model.Websites</p>
+            <p class="bottomBorderGrey">
+                <span>Genres: </span>
+                @foreach (var genre in Model.GenreName)
+                {
+                    @Html.Raw(genre)
+
+                    if (genre == Model.GenreName.Last())
+                    {
+                    }
+                    else
+                    {
+                        @(", ")
+                    }
+                }
+</div>
+
+    </div>
+
+    <div class="line notDesktop"></div>
+
+    <div class="col-lg-3 order-lg-3" id="ratingRow">
+        <div class="row rowSpacing">
+            <h3 class="text-center pinkUnderline">Rating</h3>
+        </div>
+
+        <div class="circle d-flex align-items-center justify-content-center" id="ratingCircle">
+            <h3 class="fontFam ">@Model.RatingScore%</h3>
+        </div>
+
+    </div>
+</div>
+
+<div class="line"></div>
+
+<div class="row rowSpacing">
+    <div class="col">
+        <h4 class="boldFont fontFam pinkUnderline">Summary</h4>
+        <div class="container" id="summaryText">
+            <p class="fontFam">@Model.Summary</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="line"></div>
+
+<div class="row rowSpacing">
+    <div class="container">
+        <h4 class="boldFont fontFam pinkUnderline">Reviews</h4>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="../../Content/Images/ppTest.png" class="img-fluid" />
+                            </div>
+                            <div class="col-9">
+                                <h5 class="fontFam">Cameron O'Hare</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fontFam">*****</h5>
+                        <p class="card-text fontFam">
+                            Martin began to review the course of his own past, and smiled bitterly.
+
+                            "I hope they'll like it, the people who review it," she answered.
+
+                            If my judgment ripen with my years, perhaps I may review them.
+
+                            He once began a review of George Eliot's biography, but left it unfinished.
+
+                            Proclaim at daybreak that I myself will review the troops in the Vivarrambla.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="../../Content/Images/ppTest.png" class="img-fluid" />
+                            </div>
+                            <div class="col-9">
+                                <h5 class="fontFam">Cameron O'Hare</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fontFam">*****</h5>
+                        <p class="card-text fontFam">
+                            Martin began to review the course of his own past, and smiled bitterly.
+
+                            "I hope they'll like it, the people who review it," she answered.
+
+                            If my judgment ripen with my years, perhaps I may review them.
+
+                            He once began a review of George Eliot's biography, but left it unfinished.
+
+                            Proclaim at daybreak that I myself will review the troops in the Vivarrambla.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="../../Content/Images/ppTest.png" class="img-fluid" />
+                            </div>
+                            <div class="col-9">
+                                <h5 class="fontFam">Cameron O'Hare</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title fontFam">*****</h5>
+                        <p class="card-text fontFam">
+                            Martin began to review the course of his own past, and smiled bitterly.
+
+                            "I hope they'll like it, the people who review it," she answered.
+
+                            If my judgment ripen with my years, perhaps I may review them.
+
+                            He once began a review of George Eliot's biography, but left it unfinished.
+
+                            Proclaim at daybreak that I myself will review the troops in the Vivarrambla.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
