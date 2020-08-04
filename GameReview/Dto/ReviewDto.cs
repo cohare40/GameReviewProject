@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using GameReview.Models;
 
-namespace GameReview.Models
+namespace GameReview.Dto
 {
-    public class Review
+    public class ReviewDto
     {
         [Required]
         public int Id { get; set; }

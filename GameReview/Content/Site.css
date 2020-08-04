@@ -1,11 +1,15 @@
 ﻿body {
     padding-bottom: 20px;
+    background: #f8f9fa;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background: white;
+    border: thin solid #DCDCDC;
+    border-top: none;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -78,7 +82,7 @@ textarea {
 
 .contentDivider {
     height: 400px;
-    background: #42BFDD;
+    background-image: url("Images/contentDivider.png");
 }
 
 #gameInfoRow {
@@ -158,6 +162,14 @@ textarea {
     height: 100%;
 }
 
+#coverColumn {
+    padding-bottom: 8%;
+}
+
+.modalUserBtns {
+    background-color: #084b83;
+    margin: 20px;
+}
 
 
 /**For desktop and up*/
@@ -165,7 +177,7 @@ textarea {
 
     #titleRow {
         padding-top: 30px;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
     }
 
     .line {
@@ -177,6 +189,15 @@ textarea {
     .notDesktop {
         display: none;
     }
+
+    #ratingTitle {
+        text-align: center;
+    }
+
+    #coverColumn {
+        padding-bottom: 5%;
+    }
+
     
     }
 
@@ -202,8 +223,6 @@ textarea {
 
     #mobileGameTitle {
         display: block;
-        text-decoration: underline;
-        text-decoration-color: #FF66B3;
     }
 
     #ratingCircle {

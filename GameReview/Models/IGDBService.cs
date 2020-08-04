@@ -77,11 +77,15 @@ namespace GameReview.Models
             coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToArray();
 
             //Website
-            var jsonWebsite = game.Children<JObject>()["websites"].First().ToArray();
-            formattedJson = GetPostMessage(jsonWebsite);
-            var websitePostMsg = $"fields url; where id = ({formattedJson});";
-            var websiteResult = await iGdb.PostBasicAsync(websitePostMsg, token, "https://api-v3.igdb.com/websites");
-            websiteValues = websiteResult.Children<JObject>()["url"].Values<string>().ToArray();
+            var jsonWebsite = game.Children<JObject>()["websites"];
+            if (jsonWebsite.Any())
+            {
+                formattedJson = GetPostMessage(jsonWebsite.First().ToArray());
+                var websitePostMsg = $"fields url; where id = ({formattedJson});";
+                var websiteResult =
+                    await iGdb.PostBasicAsync(websitePostMsg, token, "https://api-v3.igdb.com/websites");
+                websiteValues = websiteResult.Children<JObject>()["url"].Values<string>().ToArray();
+            }
 
             //Date released
             var unixTimestamp = game.Children<JObject>()["first_release_date"].First().Value<double>();
@@ -97,6 +101,8 @@ namespace GameReview.Models
             var gameCover = coverValues.First().Replace("thumb", "cover_big");
             var gameWebsite = websiteValues.First();
             var gameId = game.Children<JObject>()["id"].First().Value<int>();
+
+            
 
             var gameObj = new Game
             {

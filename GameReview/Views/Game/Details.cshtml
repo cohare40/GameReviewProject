@@ -11,7 +11,7 @@
 
     <div class="col-lg-6" id="mobileGameTitle">
         <!--disappears on desktops and up-->
-        <h1 class="text-center" class="pinkUnderline">@Model.Name</h1>
+        <h1 class="text-center">@Model.Name</h1>
     </div>
 
     <div class="col-lg-3 text-center order-lg-1" id="coverColumn">
@@ -26,16 +26,18 @@
 
     <div class="col-lg-6 order-lg-2">
         <div class="row" id="titleRow">
-            <h1 class="gameTitle fontFam pinkUnderline" id="desktopGameTitle">@Model.Name</h1> <!--Only shows on desktops and up-->
+            <h1 class="gameTitle fontFam" id="desktopGameTitle">@Model.Name</h1> <!--Only shows on desktops and up-->
         </div>
 
         <div class="fontFam">
             <p class="bottomBorderGrey"><span>Release Date: </span> @Model.FirstReleaseDate</p>
             <p class="bottomBorderGrey">
-                <span>Involved Companies: </span> @Model.InvolvedCompanies</p>
+                <span>Involved Companies: </span> @Model.InvolvedCompanies
+            </p>
             <p class="bottomBorderGrey">
-                <span>Platforms: </span> @Model.Platforms</p>
-            <p class="bottomBorderGrey"><span>Websites: </span><a href="@Model.Websites">@Model.Websites</a></p>
+                <span>Platforms: </span> @Model.Platforms
+            </p>
+            <p class="bottomBorderGrey"><span>Websites: </span><a href="@Model.Websites">@Model.Name</a></p>
             <p class="bottomBorderGrey"><span>Genres: </span>@Model.GenreName</p>
         </div>
 
@@ -45,7 +47,7 @@
 
     <div class="col-lg-3 order-lg-3" id="ratingRow">
         <div class="row rowSpacing">
-            <h3 class="text-center pinkUnderline">Rating</h3>
+            <h3 class="text-center pinkUnderline" id="ratingTitle">Rating</h3>
         </div>
 
         <div class="circle d-flex align-items-center justify-content-center" id="ratingCircle">
@@ -71,8 +73,14 @@
 
 <div class="row rowSpacing">
     <div class="container">
-        <h4 class="boldFont fontFam pinkUnderline">Reviews</h4>
-
+        <div class="row">
+            <div class="col">
+                <h4 class="boldFont fontFam pinkUnderline">Reviews</h4>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary float-right" type="button" data-toggle="modal" data-target="#reviewFormModal">Add Review</button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
@@ -159,6 +167,56 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="reviewFormModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @if(User.Identity.IsAuthenticated) 
+            {
+        <div class="modal-body">
+            <h4 class="text-center">Create a new review.</h4>
+            <hr />
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+
+                    <div class="col-md-10">
+
+                    </div>
+                </div>
+
+            }
+        </div>
+            }
+            else
+            {
+                <div class="modal-body">
+                    <h4 class="text-center">You need to log in to leave a review.</h4>
+                    <hr />
+                    <div class="row align-content-center justify-content-center">
+                        <li class="btn modalUserBtns">@Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class="loginBtns"})</li>
+                        <li class="btn modalUserBtns">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "loginBtns" })</li>
+                    </div>
+                </div>
+            }
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
