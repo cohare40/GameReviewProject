@@ -21,5 +21,7 @@ namespace GameReview.Models
 
         [Required]
         public int RatingScore { get; set; }
+
+        [Required] public int gameId { get; set; }
     }
 }

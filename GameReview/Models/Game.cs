@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace GameReview.Models
 {
 
-    public enum GenreEnum
+    public enum AgeRatingEnum
     {
         Three = 1,
         Seven = 2,
@@ -44,19 +44,19 @@ namespace GameReview.Models
         public string Name { get; set; }
 
         [JsonProperty("age_ratings")]
-        public  IEnumerable<int> AgeRatingImageUrl { get; set; }
+        public string AgeRatingImage { get; set; }
 
         [JsonProperty("cover")]
         public string CoverArtUrl { get; set; }
 
         [JsonProperty("first_release_date")]
-        public DateTime FirstReleaseDate { get; set; }
+        public string FirstReleaseDate { get; set; }
 
         [JsonProperty("genres")]
-        public IEnumerable<int> GenreName { get; set; }
+        public string GenreName { get; set; }
 
         [JsonProperty("platforms")]
-        public IEnumerable<int> Platforms { get; set; }
+        public string Platforms { get; set; }
 
         [JsonProperty("rating")]
         public double RatingScore{ get; set; }
@@ -68,7 +68,7 @@ namespace GameReview.Models
         public string Websites { get; set; }
 
         [JsonProperty("involved_companies")]
-        public IEnumerable<int> InvolvedCompanies{ get; set; }
+        public string InvolvedCompanies{ get; set; }
 
         //Add in constructor to set these values based on id given
     }
