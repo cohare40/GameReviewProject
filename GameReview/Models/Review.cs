@@ -8,16 +8,19 @@ namespace GameReview.Models
 {
     public class Review
     {
-        [Required]
+        
         public int Id { get; set; }
 
         [Required]
-        public byte UserAccountId { get; set; }
+        public string UserAccountId { get; set; }
 
         [Required]
+        
+        [Display(Name = "Review")]
         public string ReviewText { get; set; }
 
         [Required]
+        [Display(Name = "Rating")]
         public int RatingScore { get; set; }
 
         [Required] public int gameId { get; set; }

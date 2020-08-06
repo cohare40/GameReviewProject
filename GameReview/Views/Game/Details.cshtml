@@ -1,4 +1,5 @@
-﻿@model  GameReview.Models.Game
+﻿@using Microsoft.AspNet.Identity
+@model  GameReview.ViewModels.GameDetailsViewModel
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,14 +12,14 @@
 
     <div class="col-lg-6" id="mobileGameTitle">
         <!--disappears on desktops and up-->
-        <h1 class="text-center">@Model.Name</h1>
+        <h1 class="text-center">@Model.Game.Name</h1>
     </div>
 
     <div class="col-lg-3 text-center order-lg-1" id="coverColumn">
-        <img src="@Model.CoverArtUrl" class="img-fluid" id="gameCoverImg" />
+        <img src="@Model.Game.CoverArtUrl" class="img-fluid" id="gameCoverImg" />
 
         <div>
-            <h5 id="ageRating" class="text-center">@Model.AgeRatingImage</h5>
+            <h5 id="ageRating" class="text-center">@Model.Game.AgeRatingImage</h5>
         </div>
     </div>
 
@@ -26,19 +27,19 @@
 
     <div class="col-lg-6 order-lg-2">
         <div class="row" id="titleRow">
-            <h1 class="gameTitle fontFam" id="desktopGameTitle">@Model.Name</h1> <!--Only shows on desktops and up-->
+            <h1 class="gameTitle fontFam" id="desktopGameTitle">@Model.Game.Name</h1> <!--Only shows on desktops and up-->
         </div>
 
         <div class="fontFam">
-            <p class="bottomBorderGrey"><span>Release Date: </span> @Model.FirstReleaseDate</p>
+            <p class="bottomBorderGrey"><span>Release Date: </span> @Model.Game.FirstReleaseDate</p>
             <p class="bottomBorderGrey">
-                <span>Involved Companies: </span> @Model.InvolvedCompanies
+                <span>Involved Companies: </span> @Model.Game.InvolvedCompanies
             </p>
             <p class="bottomBorderGrey">
-                <span>Platforms: </span> @Model.Platforms
+                <span>Platforms: </span> @Model.Game.Platforms
             </p>
-            <p class="bottomBorderGrey"><span>Websites: </span><a href="@Model.Websites">@Model.Name</a></p>
-            <p class="bottomBorderGrey"><span>Genres: </span>@Model.GenreName</p>
+            <p class="bottomBorderGrey"><span>Websites: </span><a href="@Model.Game.Websites">@Model.Game.Name</a></p>
+            <p class="bottomBorderGrey"><span>Genres: </span>@Model.Game.GenreName</p>
         </div>
 
     </div>
@@ -51,7 +52,7 @@
         </div>
 
         <div class="circle d-flex align-items-center justify-content-center" id="ratingCircle">
-            <h3 class="fontFam ">@Model.RatingScore%</h3>
+            <h3 class="fontFam ">@Model.Game.RatingScore%</h3>
         </div>
 
     </div>
@@ -63,13 +64,15 @@
     <div class="col">
         <h4 class="boldFont fontFam pinkUnderline">Summary</h4>
         <div class="container" id="summaryText">
-            <p class="fontFam">@Model.Summary</p>
+            <p class="fontFam">@Model.Game.Summary</p>
 
         </div>
     </div>
 </div>
 
 <div class="line"></div>
+
+
 
 <div class="row rowSpacing">
     <div class="container">
@@ -82,92 +85,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="../../Content/Images/ppTest.png" class="img-fluid" />
-                            </div>
-                            <div class="col-9">
-                                <h5 class="fontFam">Cameron O'Hare</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title fontFam">*****</h5>
-                        <p class="card-text fontFam">
-                            Martin began to review the course of his own past, and smiled bitterly.
-
-                            "I hope they'll like it, the people who review it," she answered.
-
-                            If my judgment ripen with my years, perhaps I may review them.
-
-                            He once began a review of George Eliot's biography, but left it unfinished.
-
-                            Proclaim at daybreak that I myself will review the troops in the Vivarrambla.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="../../Content/Images/ppTest.png" class="img-fluid" />
-                            </div>
-                            <div class="col-9">
-                                <h5 class="fontFam">Cameron O'Hare</h5>
+            
+            @foreach (var review in Model.Review)
+            {
+                var user = Model.User.Distinct().Where(u => u.Id == review.UserAccountId);
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img src="../../Content/Images/ppTest.png" class="img-fluid" />
+                                </div>
+                                <div class="col-9">
+                                    <h5 class="fontFam">@user.Single().FirstName</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title fontFam">*****</h5>
-                        <p class="card-text fontFam">
-                            Martin began to review the course of his own past, and smiled bitterly.
-
-                            "I hope they'll like it, the people who review it," she answered.
-
-                            If my judgment ripen with my years, perhaps I may review them.
-
-                            He once began a review of George Eliot's biography, but left it unfinished.
-
-                            Proclaim at daybreak that I myself will review the troops in the Vivarrambla.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="../../Content/Images/ppTest.png" class="img-fluid" />
-                            </div>
-                            <div class="col-9">
-                                <h5 class="fontFam">Cameron O'Hare</h5>
-                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title fontFam">@review.RatingScore</h5>
+                            <p class="card-text fontFam">
+                                @review.ReviewText
+                            </p>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title fontFam">*****</h5>
-                        <p class="card-text fontFam">
-                            Martin began to review the course of his own past, and smiled bitterly.
-
-                            "I hope they'll like it, the people who review it," she answered.
-
-                            If my judgment ripen with my years, perhaps I may review them.
-
-                            He once began a review of George Eliot's biography, but left it unfinished.
-
-                            Proclaim at daybreak that I myself will review the troops in the Vivarrambla.
-                        </p>
-                    </div>
                 </div>
-            </div>
+            }
+
         </div>
     </div>
 </div>
@@ -186,20 +129,23 @@
             @if(User.Identity.IsAuthenticated) 
             {
         <div class="modal-body">
-            <h4 class="text-center">Create a new review.</h4>
-            <hr />
-            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm(null, null, FormMethod.Post, new {id = "reviewForm"}))
             {
                 @Html.AntiForgeryToken()
 
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
-
+                    @Html.LabelFor(m => m.Review1.RatingScore, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-
+                        @Html.TextBoxFor(m => m.Review1.RatingScore, new { @class = "form-control", id = "reviewRating", type = "number"})
                     </div>
                 </div>
-
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Review1.ReviewText, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(m => m.Review1.ReviewText, new { @class = "form-control", id = "reviewText" })
+                    </div>
+                </div>
             }
         </div>
             }
@@ -213,11 +159,53 @@
                         <li class="btn modalUserBtns">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "loginBtns" })</li>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             }
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+        <button type="" class="btn btn-primary" id="submitReview">Submit</button>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#submitReview").click(function() {
+            var rating = $("#reviewRating").val();
+            var text = $("#reviewText").val();
+            var userId = "@HttpContext.Current.User.Identity.GetUserId()";
+            var gameId = @Model.Game.Id; 
+
+            var reviewJson = {
+                UserAccountId: userId,
+                ReviewText: text,
+                RatingScore: rating,
+                gameId: gameId
+            }
+
+
+            
+             $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '/api/reviews/',
+                data: JSON.stringify(reviewJson),
+                contentType: 'application/json; charset=utf-8',
+                 success: function (data) {
+                     //clear model, exit it and display bootbox pop up saying submitted
+                     $("#reviewFormModal").modal('hide');
+                     $('#reviewForm').trigger("reset");
+                     bootbox.alert("Your review has been submitted")
+                 },
+                error: function() {
+                    console.log("error again!");
+                    console.log(data);
+                }
+
+            });
+            
+             
+
+        });
+    });
+</script>

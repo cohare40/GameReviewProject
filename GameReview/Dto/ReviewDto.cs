@@ -9,11 +9,11 @@ namespace GameReview.Dto
 {
     public class ReviewDto
     {
-        [Required]
+        
         public int Id { get; set; }
 
         [Required]
-        public byte UserAccountId { get; set; }
+        public string UserAccountId { get; set; }
 
         [Required]
         public string ReviewText { get; set; }

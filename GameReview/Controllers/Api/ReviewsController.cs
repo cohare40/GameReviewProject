@@ -4,21 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
 using AutoMapper;
 using GameReview.Dto;
 using GameReview.Models;
+using Newtonsoft.Json;
 
 namespace GameReview.Controllers.Api
 {
+
     public class ReviewsController : ApiController
     {
         private ApplicationDbContext _context;
 
-        public ReviewsController(ApplicationDbContext context)
+        public ReviewsController()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
+
 
         //GET /api/reviews
         public IHttpActionResult GetReviews()
@@ -40,12 +42,10 @@ namespace GameReview.Controllers.Api
         }
 
         //POST /api/reviews
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         public IHttpActionResult CreateReview(ReviewDto reviewDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest();
-
+            
             var review = Mapper.Map<ReviewDto, Review>(reviewDto);
 
             _context.Reviews.Add(review);
@@ -56,7 +56,6 @@ namespace GameReview.Controllers.Api
 
         //PUT /api/reviews/1
         [System.Web.Http.HttpPut]
-        [ValidateAntiForgeryToken]
         public IHttpActionResult UpdateReview(int id, ReviewDto reviewDto)
         {
             if (!ModelState.IsValid)

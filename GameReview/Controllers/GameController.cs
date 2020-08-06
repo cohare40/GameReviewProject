@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using GameReview.Models;
 using GameReview.Models.Extensions;
+using GameReview.ViewModels;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
@@ -42,8 +43,29 @@ namespace GameReview.Controllers
             var igdbService = new IGDBService();
             var game = await igdbService.GetGameDetailsAsync(id);
 
+            var reviewList = _context.Reviews.Where(r => r.gameId == game.Id).ToList();
 
-            return View(game);
+            List<ApplicationUser> userList = new List<ApplicationUser>();
+
+            foreach (var review in reviewList)
+            {
+                var userAccountId = review.UserAccountId;
+                ApplicationUser user = _context.Users.Distinct().Single(u => u.Id == userAccountId);
+                userList.Add(user);
+            }
+
+            
+
+
+            var viewModel = new GameDetailsViewModel
+            {
+                Game = game,
+                Review1 = {},
+                Review = reviewList,
+                User = userList
+            };
+
+            return View(viewModel);
         }
 
         
