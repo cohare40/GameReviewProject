@@ -11,7 +11,7 @@ using GameReview.Models;
 
 namespace GameReview.Controllers
 {
-    public class GamesController : Controller
+    public class GameApiLinkController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -28,12 +28,12 @@ namespace GameReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GameId gameId = await db.Games.FindAsync(id);
-            if (gameId == null)
+            GameApiLink gameApiLink = await db.Games.FindAsync(id);
+            if (gameApiLink == null)
             {
                 return HttpNotFound();
             }
-            return View(gameId);
+            return View(gameApiLink);
         }
 
         // GET: Games/Create
@@ -47,16 +47,16 @@ namespace GameReview.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,GameIdentifier")] GameId gameId)
+        public async Task<ActionResult> Create([Bind(Include = "Id,GameIdentifier")] GameApiLink gameApiLink)
         {
             if (ModelState.IsValid)
             {
-                db.Games.Add(gameId);
+                db.Games.Add(gameApiLink);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(gameId);
+            return View(gameApiLink);
         }
 
         // GET: Games/Edit/5
@@ -66,12 +66,12 @@ namespace GameReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GameId gameId = await db.Games.FindAsync(id);
-            if (gameId == null)
+            GameApiLink gameApiLink = await db.Games.FindAsync(id);
+            if (gameApiLink == null)
             {
                 return HttpNotFound();
             }
-            return View(gameId);
+            return View(gameApiLink);
         }
 
         // POST: Games/Edit/5
@@ -79,15 +79,15 @@ namespace GameReview.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,GameIdentifier")] GameId gameId)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,GameIdentifier")] GameApiLink gameApiLink)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(gameId).State = EntityState.Modified;
+                db.Entry(gameApiLink).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(gameId);
+            return View(gameApiLink);
         }
 
         // GET: Games/Delete/5
@@ -97,12 +97,12 @@ namespace GameReview.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GameId gameId = await db.Games.FindAsync(id);
-            if (gameId == null)
+            GameApiLink gameApiLink = await db.Games.FindAsync(id);
+            if (gameApiLink == null)
             {
                 return HttpNotFound();
             }
-            return View(gameId);
+            return View(gameApiLink);
         }
 
         // POST: Games/Delete/5
@@ -110,8 +110,8 @@ namespace GameReview.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            GameId gameId = await db.Games.FindAsync(id);
-            db.Games.Remove(gameId);
+            GameApiLink gameApiLink = await db.Games.FindAsync(id);
+            db.Games.Remove(gameApiLink);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

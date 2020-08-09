@@ -5,9 +5,9 @@ using System.Web;
 
 namespace GameReview.Models
 {
-    public class GameId
+    public class Genre
     {
         public int Id { get; set; }
-        public int GameIdentifier { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -185,6 +185,11 @@ input::-webkit-inner-spin-button {
     -webkit-text-stroke-color: black;
 }
 
+.genreBox {
+    background: #42bfdd;
+    margin: 2%;
+    font-size: 18pt;
+}
 
 
 

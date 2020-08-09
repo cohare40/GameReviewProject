@@ -1,0 +1,16 @@
+﻿@model GameReview.ViewModels.GenreIndexViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="fontFam boldFont pinkUnderline">Genres</h2>
+
+<div class="row justify-content-center">
+    @foreach (string genre in Model.Genres)
+    {
+        <div class="col-md-3 text-center w-75 genreBox align-middle">
+            <span class="fontFam boldFont">@genre</span>
+        </div>
+    }
+</div>

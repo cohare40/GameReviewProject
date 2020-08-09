@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -121,7 +122,21 @@ namespace GameReview.Models
             return gameObj;
         }
 
-        public string GetPostMessage(JToken[] json)
+        public async Task<IEnumerable> GetAllGenresAsync()
+        {
+            var source = new CancellationTokenSource();
+            var token = source.Token;
+            var postContent = $"fields *;";
+
+            var iGdb = new IGDB();
+            var game = await iGdb.PostBasicAsync(postContent, token, "https://api-v3.igdb.com/genres");
+
+            var genreList = game.Children<JObject>()["name"].Values<string>().ToList(); //Only returns string name of genres as a list
+
+            return genreList;
+        }
+
+        public string GetPostMessage(JToken[] json) //Formats the values to search for 
         {
             var jsonToList = json.Values<string>().ToList();
             var formattedJson = string.Join(", ", jsonToList);
