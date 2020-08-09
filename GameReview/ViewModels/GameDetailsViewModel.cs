@@ -10,7 +10,7 @@ namespace GameReview.ViewModels
     {
         public Game Game { get; set; }
         public Review Review1 { get; set; }
-        public IEnumerable<Review> Review { get; set; }
+        public List<Review> Review { get; set; }
         public List<ApplicationUser> User { get; set; }
     }
 }

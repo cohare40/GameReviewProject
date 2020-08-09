@@ -186,6 +186,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\ReviewsController.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dto\ReviewDto.cs" />
@@ -212,10 +213,19 @@
     <Compile Include="Migrations\202008052104368_ChangeReviewPropertyTypeToString.Designer.cs">
       <DependentUpon>202008052104368_ChangeReviewPropertyTypeToString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008061740288_ChangeToInclude.cs" />
+    <Compile Include="Migrations\202008061740288_ChangeToInclude.Designer.cs">
+      <DependentUpon>202008061740288_ChangeToInclude.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008061750097_addGameId.cs" />
+    <Compile Include="Migrations\202008061750097_addGameId.Designer.cs">
+      <DependentUpon>202008061750097_addGameId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\GameId.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IGDB.cs" />
     <Compile Include="Models\IGDBService.cs" />
@@ -236,6 +246,10 @@
     <Content Include="Content\Images\contentDivider.png" />
     <Content Include="Content\Images\gameReviewLogo.png" />
     <Content Include="Content\Images\ppTest.png" />
+    <Content Include="Content\Slick\ajax-loader.gif" />
+    <Content Include="Content\Slick\fonts\slick.svg" />
+    <Content Include="Content\Slick\slick-theme.css" />
+    <Content Include="Content\Slick\slick.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -264,6 +278,11 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\Slick\slick.scss" />
+    <Content Include="Content\Slick\slick-theme.scss" />
+    <Content Include="Content\Slick\fonts\slick.woff" />
+    <Content Include="Content\Slick\fonts\slick.ttf" />
+    <Content Include="Content\Slick\fonts\slick.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -279,6 +298,9 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\Slick\slick.js" />
+    <Content Include="Scripts\Slick\slick.min.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -357,8 +379,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -392,6 +412,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Games\Create.cshtml" />
+    <Content Include="Views\Games\Delete.cshtml" />
+    <Content Include="Views\Games\Details.cshtml" />
+    <Content Include="Views\Games\Edit.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -423,6 +448,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008052104368_ChangeReviewPropertyTypeToString.resx">
       <DependentUpon>202008052104368_ChangeReviewPropertyTypeToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008061740288_ChangeToInclude.resx">
+      <DependentUpon>202008061740288_ChangeToInclude.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008061750097_addGameId.resx">
+      <DependentUpon>202008061750097_addGameId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

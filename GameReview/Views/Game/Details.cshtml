@@ -51,7 +51,7 @@
             <h3 class="text-center pinkUnderline" id="ratingTitle">Rating</h3>
         </div>
 
-        <div class="circle d-flex align-items-center justify-content-center" id="ratingCircle">
+        <div class="circle d-flex align-items-center justify-content-center ratingCircle">
             <h3 class="fontFam ">@Model.Game.RatingScore%</h3>
         </div>
 
@@ -88,7 +88,6 @@
             
             @foreach (var review in Model.Review)
             {
-                var user = Model.User.Distinct().Where(u => u.Id == review.UserAccountId);
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header">
@@ -97,7 +96,7 @@
                                     <img src="../../Content/Images/ppTest.png" class="img-fluid" />
                                 </div>
                                 <div class="col-9">
-                                    <h5 class="fontFam">@user.Single().FirstName</h5>
+                                    <h5 class="fontFam">@review.User.FirstName</h5>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +176,7 @@
             var gameId = @Model.Game.Id; 
 
             var reviewJson = {
-                UserAccountId: userId,
+                UserId: userId,
                 ReviewText: text,
                 RatingScore: rating,
                 gameId: gameId

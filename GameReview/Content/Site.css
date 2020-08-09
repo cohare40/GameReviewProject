@@ -140,13 +140,14 @@ textarea {
     border-radius: 50%;
 }
 
-#ratingCircle {
+.ratingCircle {
    height: 150px;
     width: 150px;
     margin: auto;
     background: white;
     margin-bottom: 10px;
 }
+
 
 .rowSpacing {
     margin-top: 40px;
@@ -176,6 +177,16 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+#numberRank h2 {
+
+    color: red;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+}
+
+
+
 
 
 /**For desktop and up*/

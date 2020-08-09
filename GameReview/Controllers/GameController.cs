@@ -37,19 +37,23 @@ namespace GameReview.Controllers
             return View();
         }
 
-        [Route("game/details/{id}")]
-        public async Task<ActionResult> Details(int id)
+        [Route("game/details/{id?}")]
+        public async Task<ActionResult> Details(int? id)
         {
-            var igdbService = new IGDBService();
-            var game = await igdbService.GetGameDetailsAsync(id);
+            if (id == null)
+                return Content("No game id has been provided.");
 
-            var reviewList = _context.Reviews.Where(r => r.gameId == game.Id).ToList();
+            var igdbService = new IGDBService();
+            var game = await igdbService.GetGameDetailsAsync((int)id);
+
+            var reviewList = _context.Reviews.Where(r => r.gameId == game.Id).Include(r => r.User).ToList();
+            
 
             List<ApplicationUser> userList = new List<ApplicationUser>();
 
             foreach (var review in reviewList)
             {
-                var userAccountId = review.UserAccountId;
+                var userAccountId = review.UserId;
                 ApplicationUser user = _context.Users.Distinct().Single(u => u.Id == userAccountId);
                 userList.Add(user);
             }

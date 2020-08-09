@@ -99,7 +99,7 @@ namespace GameReview.Models
             var gameCompanies = string.Join(", ", companiesValues);
             var gamePlatforms = string.Join(", ", platformsValues);
             var gameCover = coverValues.First().Replace("thumb", "cover_big");
-            var gameWebsite = websiteValues.First();
+            var gameWebsite = websiteValues.FirstOrDefault();
             var gameId = game.Children<JObject>()["id"].First().Value<int>();
 
             
