@@ -19,13 +19,17 @@ namespace GameReview
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/slick").Include(
-                "~/Scripts/Slick/slick.js"));
+            bundles.Add(new ScriptBundle("~/bundles/lib").Include(
+                "~/Scripts/Slick/slick.js",
+                "~/Scripts/Datatables/jquery.dataTables.js",
+                "~/Scripts/Datatables/dataTables.bootstrap4.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Slick/slick.css",
                       "~/Content/Slick/slick-theme.css",
+                      "~/Content/Datatables/css/datatables.bootstrap4.css",
                       "~/Content/site.css"));
         }
     }

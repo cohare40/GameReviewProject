@@ -1,0 +1,13 @@
+﻿@model GameReview.ViewModels.GenreSearchResultViewModel
+@{
+    ViewBag.Title = "GenreSearchResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GenreSearchResult</h2>
+
+@foreach (var game in Model.Games)
+{
+    <img src="@game.CoverArtUrl" />
+    <h1>@game.Name</h1>
+}

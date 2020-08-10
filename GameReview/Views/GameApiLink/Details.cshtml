@@ -1,4 +1,4 @@
-﻿@model GameReview.Models.GameId
+﻿@model GameReview.Models.GameApiLink
 
 @{
     ViewBag.Title = "Details";
@@ -13,10 +13,12 @@
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.GameIdentifier)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.GameIdentifier)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
     </dl>

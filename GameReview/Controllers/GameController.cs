@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Antlr.Runtime;
 using GameReview.Models;
 using GameReview.Models.Extensions;
 using GameReview.ViewModels;
@@ -58,9 +59,6 @@ namespace GameReview.Controllers
                 userList.Add(user);
             }
 
-            
-
-
             var viewModel = new GameDetailsViewModel
             {
                 Game = game,
@@ -72,7 +70,37 @@ namespace GameReview.Controllers
             return View(viewModel);
         }
 
-        
+        //Returns all games that are in ApiLink db table + match the genre ID from api
+        public async Task<ActionResult> GenreSearchResultAsync(int genreId)
+        {
+            var gameInDbIdList = new List<int>();
+
+            //get every id in db table
+            foreach (var gameInDb in _context.Games)
+            {
+                gameInDbIdList.Add(gameInDb.GameIdentifier);
+            }
+            //format to query api
+            var formattedString = GetPostMessage(gameInDbIdList);
+
+            var igdbService = new IGDBService();
+            //returns list of games which match criteria in params
+            var gameList = await igdbService.GetGameNameAndPicAsync(formattedString, genreId);
+
+            var viewModel = new GenreSearchResultViewModel
+            {
+                Games = gameList
+            };
+
+            return View("GenreSearchResult", viewModel);
+        }
+
+        public string GetPostMessage(List<int> gameIdList) //Formats the values to search for 
+        {
+            var formattedString = string.Join(", ", gameIdList);
+
+            return formattedString;
+        }
 
     }
 }

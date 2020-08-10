@@ -7,10 +7,10 @@
 <h2 class="fontFam boldFont pinkUnderline">Genres</h2>
 
 <div class="row justify-content-center">
-    @foreach (string genre in Model.Genres)
+    @foreach (var genre in Model.Genres)
     {
         <div class="col-md-3 text-center w-75 genreBox align-middle">
-            <span class="fontFam boldFont">@genre</span>
+            @Html.ActionLink(genre.Name, "GenreSearchResultAsync", "Game", new {genreId = genre.Id}, null)
         </div>
     }
 </div>

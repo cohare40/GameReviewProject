@@ -38,7 +38,7 @@ namespace GameReview.Models
                 var ageRatingPostMsg = $"fields rating; where id = ({formattedJson}) & category = 2;";
                 var ageRatingResult = await iGdb.PostBasicAsync(ageRatingPostMsg, token, "https://api-v3.igdb.com/age_ratings");
                 if (ageRatingResult.Children<JObject>()["rating"].Any())
-                    ageRatingValues =  ageRatingResult.Children<JObject>()["rating"].FirstOrDefault().Value<int>();
+                    ageRatingValues = ageRatingResult.Children<JObject>()["rating"].FirstOrDefault().Value<int>();
             }
 
             //Genres
@@ -103,7 +103,7 @@ namespace GameReview.Models
             var gameWebsite = websiteValues.FirstOrDefault();
             var gameId = game.Children<JObject>()["id"].First().Value<int>();
 
-            
+
 
             var gameObj = new Game
             {
@@ -122,18 +122,67 @@ namespace GameReview.Models
             return gameObj;
         }
 
-        public async Task<IEnumerable> GetAllGenresAsync()
+        public async Task<IEnumerable<Genre>> GetAllGenresAsync()
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
             var postContent = $"fields *;";
+            var genre = new Genre();
 
             var iGdb = new IGDB();
-            var game = await iGdb.PostBasicAsync(postContent, token, "https://api-v3.igdb.com/genres");
+            var genreJArray = await iGdb.PostBasicAsync(postContent, token, "https://api-v3.igdb.com/genres");
 
-            var genreList = game.Children<JObject>()["name"].Values<string>().ToList(); //Only returns string name of genres as a list
+            var genreList = new List<Genre>();
+            foreach (var genreResult in genreJArray)//each game has its details assigned to object + added to game list
+            {
+                var genreId = (int)genreResult.SelectToken("id");
+                var genreName = genreResult.SelectToken("name").ToString();
+
+                genre = new Genre
+                {
+                    Id = genreId,
+                    Name = genreName
+                };
+                genreList.Add(genre);
+            }
+            //var genreList = genreJArray.Children<JObject>()["name"].Values<string>().ToList(); //Only returns string name of genres as a list
+
+
 
             return genreList;
+        }
+
+        public async Task<IEnumerable<Game>> GetGameNameAndPicAsync(string idList, int genreIds) //only returns 2 details about game & ID for search results 
+        {
+            var source = new CancellationTokenSource();
+            var token = source.Token;
+            var gameFields =
+                $"fields cover, name, id; where id = ({idList}) & genres = ({genreIds});";
+            string[] coverValues = { };
+            var basicGameDetails = new Game();
+
+            var iGdb = new IGDB(); //create igdb object to post game info request
+            var game = await iGdb.PostBasicAsync(gameFields, token, "https://api-v3.igdb.com/games");
+
+            var gameList = new List<Game>();
+            foreach (var gameJToken in game)//each game has its details assigned to object + added to game list
+            {
+                var jsonCover = gameJToken.SelectToken("cover");
+                var coverPostMsg = $"fields url; where id = ({jsonCover});";
+                var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, "https://api-v3.igdb.com/covers");
+                coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToArray();
+                var gameId = game.Children<JObject>()["id"].First().Value<int>();
+
+                basicGameDetails = new Game
+                {
+                    Id = gameId,
+                    Name = gameJToken["name"].ToString(),
+                    CoverArtUrl = coverValues.First().Replace("thumb", "cover_big")
+                };
+                gameList.Add(basicGameDetails);
+            }
+            //returns list of games to be iterated over in search results 
+            return gameList;
         }
 
         public string GetPostMessage(JToken[] json) //Formats the values to search for 

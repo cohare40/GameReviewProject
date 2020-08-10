@@ -9,6 +9,6 @@ namespace GameReview.ViewModels
 {
     public class GenreIndexViewModel
     {
-        public IEnumerable Genres { get; set; }
+        public IEnumerable<Genre> Genres { get; set; }
     }
 }
