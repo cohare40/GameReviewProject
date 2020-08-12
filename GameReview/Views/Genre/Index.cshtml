@@ -10,7 +10,8 @@
     @foreach (var genre in Model.Genres)
     {
         <div class="col-md-3 text-center w-75 genreBox align-middle">
-            @Html.ActionLink(genre.Name, "GenreSearchResultAsync", "Game", new {genreId = genre.Id}, null)
+            @Html.ActionLink(genre.Name, "Search", "Game",  new {searchFilter = genre.Id.ToString(), searchType = "genre" }, null)
         </div>
     }
 </div>
+

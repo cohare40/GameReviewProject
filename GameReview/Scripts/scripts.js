@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    //Carousel JS
     $('#gameCarousel').slick({
         infinite: true,
         slidesToShow: 3,
@@ -30,5 +31,10 @@
                 }
             }
         ]
+    });
+
+    $("#navbarSearchSubmit").click(function(event){
+        event.preventDefault();
+        window.location.href = $("#searchId").val() + '?searchFilter=' +  $("#searchBarNav").val() + '&searchType=name';
     });
 });

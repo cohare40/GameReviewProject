@@ -250,7 +250,6 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GameDetailsViewModel.cs" />
     <Compile Include="ViewModels\GenreIndexViewModel.cs" />
-    <Compile Include="ViewModels\GenreSearchResultViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -675,7 +674,7 @@
     <Content Include="Views\GameApiLink\Edit.cshtml" />
     <Content Include="Views\GameApiLink\Index.cshtml" />
     <Content Include="Views\Genre\Index.cshtml" />
-    <Content Include="Views\Game\GenreSearchResult.cshtml" />
+    <None Include="Views\Game\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

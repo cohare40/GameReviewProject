@@ -47,7 +47,7 @@ namespace GameReview.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,GameIdentifier")] GameApiLink gameApiLink)
+        public async Task<ActionResult> Create([Bind(Include = "Id,GameIdentifier,Name")] GameApiLink gameApiLink)
         {
             if (ModelState.IsValid)
             {

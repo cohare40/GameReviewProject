@@ -167,44 +167,47 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $("#submitReview").click(function() {
-            var rating = $("#reviewRating").val();
-            var text = $("#reviewText").val();
-            var userId = "@HttpContext.Current.User.Identity.GetUserId()";
-            var gameId = @Model.Game.Id; 
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#submitReview").click(function() {
+                var rating = $("#reviewRating").val();
+                var text = $("#reviewText").val();
+                var userId = "@HttpContext.Current.User.Identity.GetUserId()";
+                var gameId = @Model.Game.Id; 
 
-            var reviewJson = {
-                UserId: userId,
-                ReviewText: text,
-                RatingScore: rating,
-                gameId: gameId
-            }
+                var reviewJson = {
+                    UserId: userId,
+                    ReviewText: text,
+                    RatingScore: rating,
+                    gameId: gameId
+                }
 
 
             
-             $.ajax({
-                dataType: 'json',
-                type: 'POST',
-                url: '/api/reviews/',
-                data: JSON.stringify(reviewJson),
-                contentType: 'application/json; charset=utf-8',
-                 success: function (data) {
-                     //clear model, exit it and display bootbox pop up saying submitted
-                     $("#reviewFormModal").modal('hide');
-                     $('#reviewForm').trigger("reset");
-                     bootbox.alert("Your review has been submitted")
-                 },
-                error: function() {
-                    console.log("error again!");
-                    console.log(data);
-                }
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    url: '/api/reviews/',
+                    data: JSON.stringify(reviewJson),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        //clear model, exit it and display bootbox pop up saying submitted
+                        $("#reviewFormModal").modal\('hide');
+                        $('#reviewForm').trigger("reset");
+                        bootbox.alert("Your review has been submitted")
+                    },
+                    error: function() {
+                        console.log("error again!");
+                        console.log(data);
+                    }
 
-            });
+                });
             
              
 
+            });
         });
-    });
-</script>
+    </script>
+}

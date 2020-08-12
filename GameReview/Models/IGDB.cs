@@ -29,7 +29,7 @@ namespace GameReview.Models
 
         public async Task<JArray> PostBasicAsync(string content, CancellationToken cancellationToken, string url)
         {
-
+            Console.WriteLine(content);
             using (var request = new HttpRequestMessage(HttpMethod.Post, url))
             {
                 

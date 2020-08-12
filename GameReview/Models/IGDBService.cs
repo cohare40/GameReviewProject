@@ -93,7 +93,7 @@ namespace GameReview.Models
 
             //Finalised variables for game
             var gameName = game.Children<JObject>()["name"].First().ToString();
-            DateTime gameReleaseDate = ConvertFromUnixTimestamp(unixTimestamp);
+            var gameReleaseDate = ConvertFromUnixTimestamp(unixTimestamp);
             var gameSummary = game.Children<JObject>()["summary"].First().ToString();
             var gameAgeRating = Enum.GetName(typeof(AgeRatingEnum), ageRatingValues);
             var gameGenres = string.Join(", ", genreValues.ToList());
@@ -126,8 +126,7 @@ namespace GameReview.Models
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
-            var postContent = $"fields *;";
-            var genre = new Genre();
+            var postContent = $"fields *;";//*
 
             var iGdb = new IGDB();
             var genreJArray = await iGdb.PostBasicAsync(postContent, token, "https://api-v3.igdb.com/genres");
@@ -138,7 +137,7 @@ namespace GameReview.Models
                 var genreId = (int)genreResult.SelectToken("id");
                 var genreName = genreResult.SelectToken("name").ToString();
 
-                genre = new Genre
+                var genre = new Genre
                 {
                     Id = genreId,
                     Name = genreName
@@ -148,21 +147,31 @@ namespace GameReview.Models
             //var genreList = genreJArray.Children<JObject>()["name"].Values<string>().ToList(); //Only returns string name of genres as a list
 
 
-
             return genreList;
         }
 
-        public async Task<IEnumerable<Game>> GetGameNameAndPicAsync(string idList, int genreIds) //only returns 2 details about game & ID for search results 
+        public async Task<IEnumerable<Game>> GetSearchResultsAsync(string idList, string searchFilter, string searchType) //only returns 2 details about game & ID for search results 
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
-            var gameFields =
-                $"fields cover, name, id; where id = ({idList}) & genres = ({genreIds});";
-            string[] coverValues = { };
-            var basicGameDetails = new Game();
+            var genreSearchString =
+                $"fields cover, name, id; where id = ({idList}) & genres = ({searchFilter});";
+            var nameSearchString =
+                $"fields cover, name, id; where id = ({idList}) & name = *\"{searchFilter}\"*;";
 
             var iGdb = new IGDB(); //create igdb object to post game info request
-            var game = await iGdb.PostBasicAsync(gameFields, token, "https://api-v3.igdb.com/games");
+            var game = new JArray();
+
+            //Case for either name or genre search type
+            switch(searchType) 
+            {
+                case "genre":
+                     game = await iGdb.PostBasicAsync(genreSearchString, token, "https://api-v3.igdb.com/games");
+                    break;
+                case "name":
+                    game = await iGdb.PostBasicAsync(nameSearchString, token, "https://api-v3.igdb.com/games");
+                    break;
+            }
 
             var gameList = new List<Game>();
             foreach (var gameJToken in game)//each game has its details assigned to object + added to game list
@@ -170,10 +179,10 @@ namespace GameReview.Models
                 var jsonCover = gameJToken.SelectToken("cover");
                 var coverPostMsg = $"fields url; where id = ({jsonCover});";
                 var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, "https://api-v3.igdb.com/covers");
-                coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToArray();
+                var coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToArray();
                 var gameId = game.Children<JObject>()["id"].First().Value<int>();
 
-                basicGameDetails = new Game
+                var basicGameDetails = new Game
                 {
                     Id = gameId,
                     Name = gameJToken["name"].ToString(),

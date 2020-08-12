@@ -1,0 +1,41 @@
+﻿@model IEnumerable<GameReview.Models.Game>
+
+@{
+    ViewBag.Title = "GenreSearchResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GenreSearchResult</h2>
+
+
+<table id="genreSearchResultTable" class="display">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@game.CoverArtUrl" class="img-fluid w-50" />
+                </td>
+                <td>
+                    @Html.ActionLink(game.Name, "Details", "Game", new { @id = game.Id }, new { @class = "fontFam boldFont" })
+                    <h2 class="boldFont fontFam">@game.Name</h2>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#genreSearchResultTable").DataTable();
+        })
+    </script>
+}
