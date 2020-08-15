@@ -417,6 +417,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Images\contentDivider.png" />
     <Content Include="Content\Images\gameReviewLogo.png" />
+    <Content Include="Content\Images\parrallax.jpg" />
     <Content Include="Content\Images\ppTest.png" />
     <Content Include="Content\Slick\ajax-loader.gif" />
     <Content Include="Content\Slick\fonts\slick.svg" />
@@ -674,6 +675,7 @@
     <Content Include="Views\GameApiLink\Edit.cshtml" />
     <Content Include="Views\GameApiLink\Index.cshtml" />
     <Content Include="Views\Genre\Index.cshtml" />
+    <Content Include="Views\Game\GameDetails.cshtml" />
     <None Include="Views\Game\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>

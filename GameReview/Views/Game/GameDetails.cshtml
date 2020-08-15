@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "GameDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="gameInfoRow" class="row w-100 m-auto">
+    <div id="gameInfoRowBlur" class="row m-0">
+        <!--Image and platforms-->
+        <div class="col-4 pl-0">
+            <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1lvj.jpg" class="img-fluid m-1"/>
+            <div class="row w-75 m-auto">
+                <div class="col-4 p-0">
+                    <img src="https://wetheplayers.com/static/media/sony.aca3edfe.svg" class="img-fluid pb-1 pr-1"/>
+                </div>
+                <div class="col-4 p-0">
+                    <img src="https://wetheplayers.com/static/media/sony.aca3edfe.svg" class="img-fluid pb-1 pr-1"/>
+                </div>
+                <div class="col-4 p-0">
+                    <img src="https://wetheplayers.com/static/media/sony.aca3edfe.svg" class="img-fluid pb-1 pr-1"/>
+                </div>
+                <div class="col-4 p-0">
+                    <img src="https://wetheplayers.com/static/media/sony.aca3edfe.svg" class="img-fluid pb-1 pr-1"/>
+                </div>
+            </div>
+        </div>
+        <!--Title, rating and genres-->
+        <div class="col-8 pr-0 pt-2">
+            <h1 id="gameTitle" class="text-white boldFonts">Doom Eternal<span id="gameReleaseYear" class="boldFonts"> (2020)</span><span id="ratingBadge" class="badge float-right mr-3">94%</span></h1>
+            <div class="row w-100">
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary btn-sm genreBtn border-0">Point and Shoot</button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary btn-sm genreBtn border-0">Shooter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row m-0">
+    <!--Mobile age Rating and involved companies-->
+    <div id="ageRatingCompaniesMobile" class="col-md-4 fontStyle">
+        <div class="line"></div>
+        <div class="row w-100 m-auto">
+            <div class="col-5 p-1 w-100">
+                <h5 class="text-white boldFonts">Age Rating: </h5>
+            </div>
+            <div class="col-7 text-right">
+                <img src="https://wetheplayers.com/static/media/esrb_mature.a090a984.svg" class="img-fluid m-1" />
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="row w-100 m-auto">
+            <div class="col-4 p-1 w-100">
+                <h5 class="text-white boldFonts">Involved Companies: </h5>
+            </div>
+            <div class="col-8 text-right text-white">
+                <ul>
+                    <li>Coffee coffe coffeeeee</li>
+                    <li>Tea</li>
+                    <li>Milk</li>
+                </ul>
+            </div>
+        </div>
+        <div class="line"></div>
+    </div>
+    <!--Desktop age rating and involved companies-->
+    <!--Summary-->
+    <div class="col-md-4">
+        <h5 class="text-white boldFonts">Summary:</h5>
+        <div class="summaryText">
+            <p class="text-white">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+        </div>
+        <div class="line"></div>
+    </div>
+    <!--Breakdown of ratings-->
+    <div class="col-md-4">
+        <h5 class="text-white boldFonts">Ratings Breakdown:</h5>
+        <canvas id="myChart"></canvas>
+        <div class="line"></div>
+    </div>
+</div>
+
+<!--Reviews-->
+<div class="row m-0">
+    <div class="col"><h5 class="text-white boldFonts">Reviews:</h5></div>
+    <div class="row">
+        <div class="col-sm-4 w-90 m-auto">
+            <div class="card reviewCard">
+                <div class="card-header darkBlue">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="https://assets.manutd.com/AssetPicker/images/0/0/10/126/687734/Legends-Profile_George-Best21523521860789_thumb.jpg" class="img-fluid"/>
+                        </div>
+                        <div class="col-9">
+                            <p>Person Name</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body navy">
+                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

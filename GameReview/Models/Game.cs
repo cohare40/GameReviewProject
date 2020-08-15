@@ -37,39 +37,24 @@ namespace GameReview.Models
     public class Game
 
     {
-        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("age_ratings")]
         public string AgeRatingImage { get; set; }
 
-        [JsonProperty("cover")]
         public string CoverArtUrl { get; set; }
 
-        [JsonProperty("first_release_date")]
         public string FirstReleaseDate { get; set; }
 
-        [JsonProperty("genres")]
         public string GenreName { get; set; }
 
-        [JsonProperty("platforms")]
         public string Platforms { get; set; }
 
-        [JsonProperty("rating")]
-        public double RatingScore{ get; set; }
-
-        [JsonProperty("summary")]
         public string Summary { get; set; }
 
-        [JsonProperty("websites")]
         public string Websites { get; set; }
 
-        [JsonProperty("involved_companies")]
         public string InvolvedCompanies{ get; set; }
-
-        //Add in constructor to set these values based on id given
     }
 }

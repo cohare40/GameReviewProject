@@ -13,5 +13,7 @@ namespace GameReview.Models
         public int GameIdentifier { get; set; }
         [Required]
         public string Name { get; set; }
+
+
     }
 }

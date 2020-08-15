@@ -1,14 +1,13 @@
 ﻿body {
     padding-bottom: 20px;
-    background: #f8f9fa;
+    background: #1f2833;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-    background: white;
-    border: thin solid #DCDCDC;
+    padding-left: 0px;
+    padding-right: 0px;
+    background: #1F2833;
     border-top: none;
 }
 
@@ -27,7 +26,7 @@ textarea {
 }
 
 .navbar {
-    background-color: #084B83;
+    background-color: #0B0C10;
     color: white;
     padding: 0
 }
@@ -36,224 +35,103 @@ textarea {
     height: 60px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-.loginBtns {
-    color: black;
-    padding: 13px;
-    font-family: Roboto;
-    font-size: 16px;
+.fontStyle {
+    font-family: 'Lato', sans-serif;
 }
 
-.loginBtns:active {
-    color: white;
-}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&display=swap');
 
-.loginBtns:link {
-    color: white;
-}
-
-.loginBtns:visited {
-    color: white;
-}
-
-#genreBtn {
-    font-family: Roboto;
-    font-size: 16px;
-    margin-right: 15px;
-    color: white;
-    text-align: center;
-}
-
-#genreBtn:active {
-    color: white;
-}
-
-#genreBtn:link {
-    color: white;
-}
-
-#genreBtn:visited {
-    color: white;
-}
-
-#searchBarNav {
-    width: 400px;
-}
-
-.contentDivider {
-    height: 400px;
-    background-image: url("Images/contentDivider.png");
+.boldFonts {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
 }
 
 #gameInfoRow {
-    margin-top: -150px;
-    width: 100%;
+    background-image: url("Images/parrallax.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-#ageRating {
-    text-align: center;
+#gameInfoRowBlur {
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
 }
 
-.gameTitle {
-    text-align: left;
+#gameReleaseYear{
+    color: lightgray;
+    text-decoration: none;
 }
 
-#mobileGameTitle {
-    display: none;
+#ratingBadge {
+    background: #45A29E;
+    color: lightcyan;
 }
 
-#involvedCompaniesTitle {
-    margin-top: 7px;
+.genreBtn {
+    background: #45a29e;
+    font-size: 8pt;
 }
 
-#involvedCompanies {
-    margin-bottom: 20px;
+ul {
+    padding-left: 80px;
 }
 
-.bottomBorderGrey {
-    border-bottom: thin solid #DCDCDC;
-}
-
-.bottomBorderGrey span {
-    font-weight: bold;
-}
 .line {
-    height: 3px;
-    width: 100%;
-    background: #42bfdd;
-}
-
-.fontFam {
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-.boldFont {
-    font-weight: bold;
-}
-
-.pinkUnderline {
-    text-decoration: underline;
-    text-decoration-color: #FF66B3;
-}
-
-.circle {
+    width: 95%;
+    height: 2px;
+    background: #66FCF1;
+    margin-bottom: 5px;
+    margin-top: 5px;
     border-radius: 50%;
 }
 
-.ratingCircle {
-   height: 150px;
-    width: 150px;
-    margin: auto;
-    background: white;
-    margin-bottom: 10px;
+.summaryText a {
+    font-weight: bold;
+    color: #66fcf1;
 }
 
-
-.rowSpacing {
-    margin-top: 40px;
+.w-90 {
+    width: 90%;
 }
 
-.reviewBackground {
-    background: #BBE6E4;
-    padding: 5px;
-}
-
-#gameCoverImg {
-    width: 100%;
-    height: 100%;
-}
-
-#coverColumn {
-    padding-bottom: 8%;
-}
-
-.modalUserBtns {
-    background-color: #084b83;
-    margin: 20px;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-#numberRank h2 {
-
-    color: red;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-}
-
-.genreBox {
-    background: #42bfdd;
-    margin: 2%;
-    font-size: 18pt;
-}
-
-
-
-
-/**For desktop and up*/
-@media (min-width: 992px) {
-
-    #titleRow {
-        padding-top: 30px;
-        margin-bottom: 40px;
-    }
-
-    .line {
-        width: 80%;
-        margin: auto;
-        margin-top: 20px;
-    }
-
-    .notDesktop {
-        display: none;
-    }
-
-    #ratingTitle {
-        text-align: center;
-    }
-
-    #coverColumn {
-        padding-bottom: 5%;
-    }
-
+.darkBlue {
+    background: #45A29E;
     
-    }
-
-/**For tablets and below*/
-@media (max-width: 768px) {
-    .contentDivider {
-         display: none;
-    }
-
-    #gameInfoRow {
-        margin-top: 50px;
-        margin-left: 0;
-    }
-
-    #ageRating {
-        font-size: 16px;
-    }
-
-
-    #desktopGameTitle {
-        display: none;
-    }
-
-    #mobileGameTitle {
-        display: block;
-    }
-
-    #ratingCircle {
-        background: #42BFDD;
-        color: white;
-    }
-
-    .rowSpacing {
-        margin-top: 20px;
-    }
-
 }
+
+.navy {
+    background: #1f2833;
+}
+
+.reviewCard {
+    border-color: #45a29e;
+}
+
+
+
+    @media all and (min-width: 960px) {
+        h1 {
+            font-size: 50px;
+        }
+    }
+
+    @media all and (max-width: 959px) and (min-width: 600px) {
+        h1 {
+            font-size: 9vw;
+        }
+    }
+
+    @media all and (max-width: 599px) and (min-width: 50px) {
+        h1 {
+            font-size: 9vw;
+        }
+    }
+    /**Desktops and up*/
+    @media (min-width: 992px) {
+        #ageRatingCompaniesMobile {
+            display: none;
+        }
+    }

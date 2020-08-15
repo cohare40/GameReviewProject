@@ -50,7 +50,7 @@ namespace GameReview.Controllers
                 User = userList
             };
 
-            return View(viewModel);
+            return View("GameDetails");
         }
 
         //Returns all games that are in ApiLink db table + match the genre ID from api
