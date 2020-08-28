@@ -34,23 +34,29 @@ namespace GameReview.Controllers
 
             var reviewList = _context.Reviews
                 .Where(r => r.gameId == game.Id)
-                .Include(r => r.User)
-                .ToList();
+                .Include(r => r.User);
 
 
             var userList = reviewList.Select(review => review.UserId)
                 .Select(userAccountId => _context.Users.Distinct()
-                    .Single(u => u.Id == userAccountId))
+                    .FirstOrDefault(u => u.Id == userAccountId));
+
+
+            var platformList = game.Platforms
+                .Select(platform => _context.Platforms.SingleOrDefault(p => p.ApiGenreId == platform))
+                .Where(platformToAdd => platformToAdd != null)
                 .ToList();
+
 
             var viewModel = new GameDetailsViewModel
             {
                 Game = game,
-                Review = reviewList,
-                User = userList
+                Review = await reviewList.ToListAsync(),
+                User = await userList.ToListAsync(),
+                Platforms = platformList
             };
 
-            return View("GameDetails");
+            return View("GameDetails", viewModel);
         }
 
         //Returns all games that are in ApiLink db table + match the genre ID from api

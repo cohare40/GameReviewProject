@@ -1,33 +1,29 @@
 ﻿$(document).ready(function () {
     //Carousel JS
     $('#gameCarousel').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        centerMode: true,
+        slidesToShow: 1,
+        arrows: false,
         autoplay: true,
         autoplaySpeed: 5000,
+        centrePadding: '50px' ,
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 768,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
                 }
             }
         ]
@@ -45,7 +41,7 @@
             var shortText = $pTag.text();
             shortText = shortText.substring(0, 300);
             $pTag.addClass('fullArticle').hide();
-            $pTag.append('</p><a class="read-less-link text-white">Read Less</a>');
+            $pTag.append('...</p><a class="read-less-link text-white">Read Less</a>');
             $j(this).append('<p class="preview text-white">'+shortText+'</p><div class="curtain-shadow"></div><a class="read-more-link text-white">Read more</a>');
         }
     });

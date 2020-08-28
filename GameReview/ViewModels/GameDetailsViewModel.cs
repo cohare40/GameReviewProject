@@ -6,11 +6,13 @@ using GameReview.Models;
 
 namespace GameReview.ViewModels
 {
-    public class GameDetailsViewModel
+    public class GameDetailsViewModel 
     {
         public Game Game { get; set; }
         public Review Review1 { get; set; }
         public List<Review> Review { get; set; }
-        public List<ApplicationUser> User { get; set; }
+        public List<ApplicationUser> User { get; set;}
+
+        public List<Platform> Platforms { get; set; }
     }
 }

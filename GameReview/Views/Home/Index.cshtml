@@ -2,83 +2,141 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="row pt-3"><h4 class="boldFont fontFam pinkUnderline ml-3">Featured Games:</h4></div>
+<div class="row">
+    <div class="col">
+        <!--Image-->
+        <div id="topHomeImg" class="row overlay">
 
-<div class="jumbotron">
-    <div class="" id="gameCarousel">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="m-1 img-fluid" />
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/kvbprpoprnvjw6qjmei4.jpg" class="m-1 img-fluid" />
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1x6i.jpg" class="m-1 img-fluid" />
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1yqu.jpg" class="m-1 img-fluid" />
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1yrz.jpg" class="m-1 img-fluid" />
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1ysn.jpg" class="m-1 img-fluid" />
+        </div>
+
+        <div id="gameHomeContent" class="row">
+            <div class="col d-flex flex-column align-self-center">
+                <h1 class="text-white mt-3 mt-sm-0">A REVIEW SITE MADE FOR GAMERS BY GAMERS</h1>
+
+                @Html.ActionLink("Sign Up!", "Register", "Account", null, new {@class = "boldFonts btn btn-block btn-primary align-content-center gen-button w-50 mt-3 ml-auto mr-auto ml-sm-0 mr-sm-0" })
+                <h5 class="text-white mt-3">Sign up to join our community and make your first review</h5>
+            </div>
+            <div class="col-5 d-none d-sm-block">
+                <div class="jumbotron pt-2 pb-3 w-100" id="homeCarousel">
+                    <div id="gameCarousel" class="container">
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1rft.jpg" class="m-auto ml-1 mr-1 img-fluid"/>
+
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2edq.jpg" class="m-auto ml-1 mr-1 img-fluid"/>
+
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2dto.jpg" class="m-auto ml-1 mr-1  img-fluid"/>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="line"></div>
 
-
-<div class="row rowSpacing"><h4 class="boldFont fontFam pinkUnderline ml-3">Top Rated:</h4></div>
 
 <!--Should be 6 in here -->
-<div class="row">
-    <div class="col-md-4 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h3 class="fontFam boldFont">Pokemon</h3>
+<div class="row mt-4 mt-sm-0">
+    <div class="col-md-5 d-flex flex-column align-self-center order-2 order-md-1 mt-2 mt-md-0">
+        <h2 class="text-white boldFonts">Top Rated</h2>
+        <div class="line  w-50 ml-0 mt-0"></div>
+        <h5 class="text-white m-1">The most popular games of all time as rated by our users. New games and reviews are added often so check back regularly to see what is the most current popular game.</h5>
+        @Html.ActionLink("MORE TOP RATED GAMES", "Register", "Account", null, new { id ="topRatedGamesBtn", @class = "boldFonts btn btn-block btn-primary align-content-center gen-button mt-3 mb-1 w-75 ml-auto mr-auto ml-sm-0 mr-sm-0" })
     </div>
-    <div class="col-md-4 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h3 class="fontFam boldFont">Pokemon</h3>
-    </div>
-    <div class="col-md-4 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid" />
-        <h3 class="fontFam boldFont">Pokemon</h3>
-    </div>
-    <div class="col-md-4 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h3 class="fontFam boldFont">Pokemon</h3>
-    </div>
-    <div class="col-md-4 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h3 class="fontFam boldFont">Pokemon</h3>
-    </div>
-    <div class="col-md-4 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h3 class="fontFam boldFont">Pokemon</h3>
+    <div class="col-md-7 order-1 order-md-2">
+        <div class="row">
+            <div class="col-4">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1rse.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-4">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co28g1.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-4">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2a5n.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-4">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2ade.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-4">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co20r3.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-4">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1tgt.jpg" class="img-fluid mb-2 mt-3 game-thumbs "/>
+
+            </div>
+        </div>
     </div>
 </div>
 
 <div class="line"></div>
 
-<div class="row rowSpacing"><h4 class="boldFont fontFam pinkUnderline ml-3">Discover:</h4></div>
 
 <!--Should be 8 in here -->
 <div class="row">
-    <div class="col-md-3 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid w-75" />
-        <h4 class="fontFam boldFont">Pokemon</h4>
+    <div class="col-md-8 order-2 order-md-1">
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2fe8.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+          </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r77.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2eq1.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r0o.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1syk.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+            <div class="col-6 col-md-3">
+                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
+
+            </div>
+        </div>
     </div>
-    <div class="col-md-3 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h4 class="fontFam boldFont">Pokemon</h4>
-    </div>
-    <div class="col-md-3 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid" />
-        <h4 class="fontFam boldFont">Pokemon</h4>
-    </div>
-    <div class="col-md-3 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h4 class="fontFam boldFont">Pokemon</h4>
-    </div>
-    <div class="col-md-3 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h4 class="fontFam boldFont">Pokemon</h4>
-    </div>
-    <div class="col-md-3 text-center">
-        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid " />
-        <h4 class="fontFam boldFont">Pokemon</h4>
+    <div class="col-md-4 d-flex flex-column align-self-center p-1 order-1 order-md-2">
+        <h2 class="text-white boldFonts">Discover</h2>
+        <div class="line w-50 ml-0 mt-0"></div>
+        <h5 class="text-white m-1">From our wide range of games available you'll definitely be able to find something new to play on here. From puzzle games to shooters there's somethings on here for everyone.</h5>
     </div>
 </div>
 
+<div class="line"></div>
 
+<div class="row">
+    <div class="col">
+        <div id="signUpBackgroundImg" class="row overlay"></div>
+        <div id="signUpRowContent" class="row">
+            <div class="col-md-5 d-flex flex-column align-self-center p-1">
+                <h2 class="text-white boldFonts">Sign Up</h2>
+                <div class="line w-50 ml-0 mt-0"></div>
+                <h5 class="text-white m-1">Sign up to join our community! When you've signed up you can leave reviews on games to help other players decide whether a game is worth buying or not. </h5>
+            </div>
+            <div class="col-md-7 d-flex align-items-center justify-content-center">
+                <div class="row w-100">
+                    <div class="col d-flex justify-content-center">
+                        @Html.ActionLink("Sign Up!", "Register", "Account", null, new {@class = "boldFonts btn btn-block btn-primary align-self-center gen-button big-button w-75 mt-3"})
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>

@@ -4,13 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="fontFam boldFont pinkUnderline">Genres</h2>
+<h2 class="text-white">Genres:</h2>
 
 <div class="row justify-content-center">
     @foreach (var genre in Model.Genres)
     {
-        <div class="col-md-3 text-center w-75 genreBox align-middle">
-            @Html.ActionLink(genre.Name, "Search", "Game",  new {searchFilter = genre.Id.ToString(), searchType = "genre" }, null)
+
+        <div class="col-md-3 text-center w-75 mt-2 mb-2">
+            @Html.ActionLink(genre.Name, "Search", "Game", new {searchFilter = genre.Id.ToString(), searchType = "genre"}, new {type = "button", @class = "btn btn-primary genreSearchBtn border-0 m-2 w-100 h-100 d-flex align-items-center justify-content-center"})
         </div>
     }
 </div>

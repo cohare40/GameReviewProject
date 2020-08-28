@@ -35,6 +35,8 @@ namespace GameReview.Models
     {
         public DbSet<Review> Reviews { get; set; }
         public DbSet<GameApiLink> Games { get; set; }
+        public DbSet<Platform> Platforms { get; set; }
+        public DbSet<AgeRating> AgeRatings { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

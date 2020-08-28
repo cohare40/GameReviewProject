@@ -24,15 +24,6 @@ namespace GameReview.Models
         AO = 12
     }
 
-    public enum PlatFormEnum
-    {
-        console = 1,
-        arcade = 2,
-        platform = 3,
-        operating_system = 4,
-        portable_console = 5,
-        computer= 6
-    }
 
     public class Game
 
@@ -41,20 +32,20 @@ namespace GameReview.Models
 
         public string Name { get; set; }
 
-        public string AgeRatingImage { get; set; }
+        public IEnumerable<string> AgeRatingImage { get; set; }
 
         public string CoverArtUrl { get; set; }
 
         public string FirstReleaseDate { get; set; }
 
-        public string GenreName { get; set; }
+        public IEnumerable<string> GenreName { get; set; }
 
-        public string Platforms { get; set; }
+        public IEnumerable<int> Platforms { get; set; }
 
         public string Summary { get; set; }
 
         public string Websites { get; set; }
 
-        public string InvolvedCompanies{ get; set; }
+        public IEnumerable<string> InvolvedCompanies{ get; set; }
     }
 }

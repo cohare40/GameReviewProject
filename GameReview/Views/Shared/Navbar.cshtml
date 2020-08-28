@@ -1,24 +1,29 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
-        <img src="../../Content/Images/gameReviewLogo.png" class="img-fluid logo"/>
-    </a>
-    <button id="navbarToggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+﻿<nav id="nav" class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+            <img src="../../Content/Images/Game Review.png" class="img-fluid logo" />
+        </a>
+        <button id="navbarToggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                @Html.ActionLink("Genres", "Index", "Genre", routeValues: null, htmlAttributes: new { id = "genreBtn", @class = "nav-link"})
-            </li>
-            <li class="nav-item" >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("GENRES", "Index", "Genre", routeValues: null, htmlAttributes: new { @class = "nav-link navBtn text-white ml-2" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("GAMES", "Index", "Genre", routeValues: null, htmlAttributes: new { @class = "nav-link navBtn text-white ml-2" })
+                </li>
+            </ul>
+            <div class="nav-item">
                 <form class="form-inline my-2 my-lg-0 justify-content-center">
                     <input id="searchBarNav" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-light my-2 my-sm-0" type="submit" id="navbarSearchSubmit">Search</button>
                 </form>
-            </li>
-        </ul>
-        <input id="searchId" type="hidden" value="@Url.Action("Search", "Game")"/>
-        @Html.Partial("_LoginPartial")
+            </div>
+            <input id="searchId" type="hidden" value="@Url.Action("Search", "Game")" />
+            @Html.Partial("_LoginPartial")
+        </div>
     </div>
 </nav>

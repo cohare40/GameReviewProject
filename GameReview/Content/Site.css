@@ -5,10 +5,11 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
     background: #1F2833;
     border-top: none;
+    
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -32,7 +33,7 @@ textarea {
 }
 
 .logo {
-    height: 60px;
+    height: 80px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
@@ -41,11 +42,12 @@ textarea {
     font-family: 'Lato', sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@900&display=swap');
 
 .boldFonts {
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Catamaran', sans-serif;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
 #gameInfoRow {
@@ -55,7 +57,7 @@ textarea {
     background-size: cover;
 }
 
-#gameInfoRowBlur {
+.game-info-row-blur {
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
 }
@@ -80,13 +82,19 @@ ul {
 }
 
 .line {
-    width: 95%;
-    height: 2px;
-    background: #66FCF1;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    border-radius: 50%;
+    width: 100%;
+    height: 1px;
+    margin: auto;
+    background: rgb(102,252,241);
+    background: radial-gradient(circle, rgba(102,252,241,0.9) 12%, rgba(102,252,241,0.6) 41%, rgba(102,252,241,0.4) 76%);
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
+
+.shadow {
+    box-shadow: inset 0 4px 40px 0 rgba(0, 0, 0, .2);
+}
+
 
 .summaryText a {
     font-weight: bold;
@@ -110,28 +118,280 @@ ul {
     border-color: #45a29e;
 }
 
+#myChart {
+    width: 80%;
+}
+
+#contentLine {
+    display: none;
+}
+
+#nav {
+    background: #45a29e;
+}
+
+#platforms {
+    background: white;
+    border-radius: 10px;
+}
+
+#ageRating {
+    max-width: 60px;
+    max-height: 90px;
+}
+
+.genreSearchBtn {
+    background: #45a29e;
+    font-size: calc(1rem + 1vw);
 
 
-    @media all and (min-width: 960px) {
-        h1 {
-            font-size: 50px;
-        }
+}
+
+#homeCarousel {
+    background: transparent;
+}
+
+
+
+.slick-slider {
+    margin: 0 -15px;
+    margin-bottom: 0px;
+}
+
+.slick-slide {
+    padding: 10px;
+    text-align: center;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.slick-center {
+    transform: scale(1.25);
+    transition: transform .75s;
+}
+
+.slick-list {
+    padding: 45px 60px !important;
+    margin-left: 30px !important;
+}
+
+.navBtn {
+    font-size: 12pt;
+    text-transform: capitalize;
+    font-family: 'Catamaran', sans-serif;
+    letter-spacing: .1rem;
+    font-weight: 500;
+}
+
+.navBtn:hover {
+    text-decoration: underline;
+}
+
+.loginBtns a{
+    color: white;
+    font-weight: 600;
+    border: thin white solid;
+    border-radius: 5px;
+}
+
+    .loginBtns a:hover {
+        text-decoration: underline;
     }
 
+.gen-button {
+    background: #45a29e;
+    border: none;
+    color: white;
+    font-size: 12pt;
+    letter-spacing: .15rem;
+    text-transform: uppercase;
+}
+ 
+.gen-button:hover {
+    background: #66fcf1;
+}
+.big-button {
+    font-size: 20pt;
+    font-weight: 200;
+}
+
+
+#topHomeImg {
+    background-image: url('Images/homeWallpaper.jpg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+
+.overlay {
+    filter: opacity(100%);
+    filter: grayscale(80%);
+}
+
+#gameHomeContent {
+    background: rgb(31,40,51);
+    background: linear-gradient(180deg, rgba(31,40,51,0.1741071428571429) 0%, rgba(31,40,51,0.8743872549019608) 100%);
+    position: relative;
+}
+
+.game-thumbs {
+    border-radius: 5px;
+}
+
+h1 {
+    font-weight: 700;
+    letter-spacing: .08rem;
+    line-height: 4rem;
+}
+
+h2 {
+    letter-spacing: .1rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+h5 {
+    line-height: 2.5rem;
+    text-align: center;
+    letter-spacing: 0.07rem;
+}
+
+#signUpBackgroundImg {
+    background-image: url('Images/signupWallpaper.jpg');
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+
+#signUpRowContent {
+    background: rgb(31,40,51);
+    background: radial-gradient(circle, rgba(31,40,51,0.006039915966386533) 0%, rgba(31,40,51,1) 100%);
+    position: relative;
+}
+
+
+/*Desktop*/
+    @media all and (min-width: 960px) {
+        h1 {
+            font-size: 60px;
+        }
+
+    }
+
+    /*Desktop and Tablet*/
     @media all and (max-width: 959px) and (min-width: 600px) {
         h1 {
             font-size: 9vw;
         }
     }
 
+    /*Phones and small tablet*/
     @media all and (max-width: 599px) and (min-width: 50px) {
         h1 {
             font-size: 9vw;
+            line-height: 2rem;
+        }
+
+        h5 {
+            text-align: center;
         }
     }
+
+    /*Text Alignment for Tablet Up*/
+    @media (min-width: 768px) {
+        h5 {
+            text-align: left;
+        }
+    }
+
     /**Desktops and up*/
     @media (min-width: 992px) {
-        #ageRatingCompaniesMobile {
-            display: none;
+        #desktopBlurImage {
+            
+            position: relative;
+        }
+
+        #parrallaxImage {
+            height: 448px;
+            background: url("Images/parrallax.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(1px);
+            -webkit-filter: blur(1px);
+            position: absolute;
+        }
+
+        #gameInfoRow {
+            margin-top: 25%;
+            background-image: url("");
+            z-index: 90;
+        }
+
+        #titleCol {
+            margin-top: 10%;
+        }
+
+        .homeTextBorder {
+            border: medium #45a29e solid;
+            border-radius: 5px;
+        }
+
+        .sign-up-button {
+            font-size: 18pt;
+            margin-top: 0;
+        }
+
+        #topRatedGamesButton {
+            margin: 0;
         }
     }
+
+
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #1f2833;
+}
+
+.arrow span {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-bottom: 5px solid #06A8FF;
+    border-right: 5px solid #06A8FF;
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: animate 2s infinite;
+}
+
+.arrow span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.arrow span:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px,-20px);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px,20px);
+    }
+}

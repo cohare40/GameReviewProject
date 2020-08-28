@@ -234,8 +234,53 @@
     <Compile Include="Migrations\202008091453367_MakeGameApiLinkFieldsRequred.Designer.cs">
       <DependentUpon>202008091453367_MakeGameApiLinkFieldsRequred.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008181123284_AddPlatforms.cs" />
+    <Compile Include="Migrations\202008181123284_AddPlatforms.Designer.cs">
+      <DependentUpon>202008181123284_AddPlatforms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181132055_AddApiGenreId.cs" />
+    <Compile Include="Migrations\202008181132055_AddApiGenreId.Designer.cs">
+      <DependentUpon>202008181132055_AddApiGenreId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181132265_SeedPlatform.cs" />
+    <Compile Include="Migrations\202008181132265_SeedPlatform.Designer.cs">
+      <DependentUpon>202008181132265_SeedPlatform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181350583_AddAgeRatingTable.cs" />
+    <Compile Include="Migrations\202008181350583_AddAgeRatingTable.Designer.cs">
+      <DependentUpon>202008181350583_AddAgeRatingTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181355037_AddAgeRating.cs" />
+    <Compile Include="Migrations\202008181355037_AddAgeRating.Designer.cs">
+      <DependentUpon>202008181355037_AddAgeRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181355243_SeedAgeRating.cs" />
+    <Compile Include="Migrations\202008181355243_SeedAgeRating.Designer.cs">
+      <DependentUpon>202008181355243_SeedAgeRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181442547_AddApiLinkToAgeRating.cs" />
+    <Compile Include="Migrations\202008181442547_AddApiLinkToAgeRating.Designer.cs">
+      <DependentUpon>202008181442547_AddApiLinkToAgeRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181443284_SeedAgeRatingApiLink.cs" />
+    <Compile Include="Migrations\202008181443284_SeedAgeRatingApiLink.Designer.cs">
+      <DependentUpon>202008181443284_SeedAgeRatingApiLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181515327_ChangeRatingToString.cs" />
+    <Compile Include="Migrations\202008181515327_ChangeRatingToString.Designer.cs">
+      <DependentUpon>202008181515327_ChangeRatingToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181515590_SeedESRBRating.cs" />
+    <Compile Include="Migrations\202008181515590_SeedESRBRating.Designer.cs">
+      <DependentUpon>202008181515590_SeedESRBRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008181539108_ChangePS3Logo.cs" />
+    <Compile Include="Migrations\202008181539108_ChangePS3Logo.Designer.cs">
+      <DependentUpon>202008181539108_ChangePS3Logo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AgeRating.cs" />
     <Compile Include="Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameApiLink.cs" />
@@ -244,6 +289,7 @@
     <Compile Include="Models\IGDB.cs" />
     <Compile Include="Models\IGDBService.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SubmittedGameId.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -416,9 +462,12 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Images\contentDivider.png" />
+    <Content Include="Content\Images\Game Review.png" />
     <Content Include="Content\Images\gameReviewLogo.png" />
+    <Content Include="Content\Images\homeWallpaper.jpg" />
     <Content Include="Content\Images\parrallax.jpg" />
     <Content Include="Content\Images\ppTest.png" />
+    <Content Include="Content\Images\signupWallpaper.jpg" />
     <Content Include="Content\Slick\ajax-loader.gif" />
     <Content Include="Content\Slick\fonts\slick.svg" />
     <Content Include="Content\Slick\slick-theme.css" />
@@ -657,7 +706,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Game\Details.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -723,6 +771,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008091453367_MakeGameApiLinkFieldsRequred.resx">
       <DependentUpon>202008091453367_MakeGameApiLinkFieldsRequred.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181123284_AddPlatforms.resx">
+      <DependentUpon>202008181123284_AddPlatforms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181132055_AddApiGenreId.resx">
+      <DependentUpon>202008181132055_AddApiGenreId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181132265_SeedPlatform.resx">
+      <DependentUpon>202008181132265_SeedPlatform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181350583_AddAgeRatingTable.resx">
+      <DependentUpon>202008181350583_AddAgeRatingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181355037_AddAgeRating.resx">
+      <DependentUpon>202008181355037_AddAgeRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181355243_SeedAgeRating.resx">
+      <DependentUpon>202008181355243_SeedAgeRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181442547_AddApiLinkToAgeRating.resx">
+      <DependentUpon>202008181442547_AddApiLinkToAgeRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181443284_SeedAgeRatingApiLink.resx">
+      <DependentUpon>202008181443284_SeedAgeRatingApiLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181515327_ChangeRatingToString.resx">
+      <DependentUpon>202008181515327_ChangeRatingToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181515590_SeedESRBRating.resx">
+      <DependentUpon>202008181515590_SeedESRBRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008181539108_ChangePS3Logo.resx">
+      <DependentUpon>202008181539108_ChangePS3Logo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
