@@ -278,6 +278,34 @@
     <Compile Include="Migrations\202008181539108_ChangePS3Logo.Designer.cs">
       <DependentUpon>202008181539108_ChangePS3Logo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008292126185_AddGenreIdToDb.cs" />
+    <Compile Include="Migrations\202008292126185_AddGenreIdToDb.Designer.cs">
+      <DependentUpon>202008292126185_AddGenreIdToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008301047508_addGenreIdsToDb.cs" />
+    <Compile Include="Migrations\202008301047508_addGenreIdsToDb.Designer.cs">
+      <DependentUpon>202008301047508_addGenreIdsToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202008301107380_FixGenreIds.cs" />
+    <Compile Include="Migrations\202008301107380_FixGenreIds.Designer.cs">
+      <DependentUpon>202008301107380_FixGenreIds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009131451495_AddPlatformDescriptionColumn.cs" />
+    <Compile Include="Migrations\202009131451495_AddPlatformDescriptionColumn.Designer.cs">
+      <DependentUpon>202009131451495_AddPlatformDescriptionColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009220910585_AddGenreTable.cs" />
+    <Compile Include="Migrations\202009220910585_AddGenreTable.Designer.cs">
+      <DependentUpon>202009220910585_AddGenreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009220913202_AddFieldToGenre.cs" />
+    <Compile Include="Migrations\202009220913202_AddFieldToGenre.Designer.cs">
+      <DependentUpon>202009220913202_AddFieldToGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009220915216_SeedGenre.cs" />
+    <Compile Include="Migrations\202009220915216_SeedGenre.Designer.cs">
+      <DependentUpon>202009220915216_SeedGenre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgeRating.cs" />
@@ -295,7 +323,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GameDetailsViewModel.cs" />
-    <Compile Include="ViewModels\GenreIndexViewModel.cs" />
+    <Compile Include="ViewModels\GameItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -462,12 +490,23 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Images\contentDivider.png" />
+    <Content Include="Content\Images\fightingImg.jpg" />
     <Content Include="Content\Images\Game Review.png" />
     <Content Include="Content\Images\gameReviewLogo.png" />
     <Content Include="Content\Images\homeWallpaper.jpg" />
+    <Content Include="Content\Images\musicImg.jpg" />
     <Content Include="Content\Images\parrallax.jpg" />
+    <Content Include="Content\Images\platformImg.jpg" />
     <Content Include="Content\Images\ppTest.png" />
+    <Content Include="Content\Images\puzzleImg.png" />
+    <Content Include="Content\Images\racingImg.jpg" />
+    <Content Include="Content\Images\rpgImg.jpg" />
+    <Content Include="Content\Images\rtsImg.jpg" />
+    <Content Include="Content\Images\searchWallpaper.jpg" />
+    <Content Include="Content\Images\shooterImg.jpg" />
     <Content Include="Content\Images\signupWallpaper.jpg" />
+    <Content Include="Content\Images\simImg.jpg" />
+    <Content Include="Content\Images\sportImg.png" />
     <Content Include="Content\Slick\ajax-loader.gif" />
     <Content Include="Content\Slick\fonts\slick.svg" />
     <Content Include="Content\Slick\slick-theme.css" />
@@ -481,6 +520,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Controller\Game\SearchResultsScript.js" />
     <Content Include="Scripts\copy_csv_xls_pdf.swf" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -597,6 +637,28 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\matches-selector.js" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\tests.html" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\tests.js" />
+    <Content Include="Scripts\node\node_modules\ev-emitter\ev-emitter.js" />
+    <Content Include="Scripts\node\node_modules\ev-emitter\sandbox\1.html" />
+    <Content Include="Scripts\node\node_modules\ev-emitter\test\test.js" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\index.html" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\unit\filter-find-elements.js" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\unit\get-parent.js" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\unit\html-init.js" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\unit\make-array.js" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\unit\remove-from.js" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\utils.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\dist\infinite-scroll.pkgd.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\dist\infinite-scroll.pkgd.min.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\button.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\core.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\history.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\index.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\page-load.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\scroll-watch.js" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\js\status.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -724,7 +786,24 @@
     <Content Include="Views\GameApiLink\Index.cshtml" />
     <Content Include="Views\Genre\Index.cshtml" />
     <Content Include="Views\Game\GameDetails.cshtml" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\.npmignore" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\bower.json" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\package.json" />
+    <Content Include="Scripts\node\node_modules\desandro-matches-selector\README.md" />
+    <Content Include="Scripts\node\node_modules\ev-emitter\bower.json" />
+    <Content Include="Scripts\node\node_modules\ev-emitter\package.json" />
+    <Content Include="Scripts\node\node_modules\ev-emitter\README.md" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\bower.json" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\package.json" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\README.md" />
+    <Content Include="Scripts\node\node_modules\fizzy-ui-utils\test\unit\.jshintrc" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\package.json" />
+    <Content Include="Scripts\node\node_modules\infinite-scroll\README.md" />
+    <Content Include="Scripts\node\package-lock.json" />
+    <Content Include="Scripts\node\package.json" />
     <None Include="Views\Game\SearchResult.cshtml" />
+    <Content Include="Views\Shared\GameItem.cshtml" />
+    <Content Include="Views\Shared\ListOfGamesToAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -804,6 +883,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008181539108_ChangePS3Logo.resx">
       <DependentUpon>202008181539108_ChangePS3Logo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008292126185_AddGenreIdToDb.resx">
+      <DependentUpon>202008292126185_AddGenreIdToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008301047508_addGenreIdsToDb.resx">
+      <DependentUpon>202008301047508_addGenreIdsToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008301107380_FixGenreIds.resx">
+      <DependentUpon>202008301107380_FixGenreIds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009131451495_AddPlatformDescriptionColumn.resx">
+      <DependentUpon>202009131451495_AddPlatformDescriptionColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009220910585_AddGenreTable.resx">
+      <DependentUpon>202009220910585_AddGenreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009220913202_AddFieldToGenre.resx">
+      <DependentUpon>202009220913202_AddFieldToGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009220915216_SeedGenre.resx">
+      <DependentUpon>202009220915216_SeedGenre.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

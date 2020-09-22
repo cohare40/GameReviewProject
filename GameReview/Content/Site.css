@@ -131,7 +131,6 @@ ul {
 }
 
 #platforms {
-    background: white;
     border-radius: 10px;
 }
 
@@ -141,10 +140,16 @@ ul {
 }
 
 .genreSearchBtn {
-    background: #45a29e;
+    background-size: cover;
     font-size: calc(1rem + 1vw);
+    height: 8rem;
+    width: 8rem;
+    font-weight: bold;
+    -webkit-text-stroke: 2px black;
+}
 
-
+.genreSearchBtn:hover {
+    text-decoration: underline;
 }
 
 #homeCarousel {
@@ -246,6 +251,12 @@ h1 {
     line-height: 4rem;
 }
 
+.h1 {
+    font-weight: 700;
+    letter-spacing: .08rem;
+    line-height: 4rem;
+}
+
 h2 {
     letter-spacing: .1rem;
     font-weight: 500;
@@ -273,11 +284,82 @@ h5 {
     position: relative;
 }
 
+#searchBarNav {
+    background: #0b0c10;
+    border: none;
+    color: white;
+}
+
+#searchTitleGame {
+    font-weight: 700;
+    letter-spacing: .25rem;
+}
+
+#searchTopImg {
+    background-image: url('Images/searchWallpaper.jpg');
+    height: 100%;
+    max-height: 30rem;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+}
+
+#searchContent {
+    background: rgb(31,40,51);
+    background: radial-gradient(circle, rgba(31,40,51,0.4906337535014006) 0%, rgba(31,40,51,1) 100%);
+    position: relative;
+}
+
+#loader {
+    display: none;
+}
+
+#finisher {
+    display: none;
+}
+
+.divider {
+    height: 1px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background: gray;
+}
+
+.search-result-title {
+    font-size: 20pt;
+    font-weight: bold;
+    color: white;
+    letter-spacing: .15rem;
+}
+
+.search-image {
+    min-width: 64px;
+    min-height: 84px;
+}
+
+
+.search-platform-images {
+    height: 2rem;
+    width: 2rem;
+}
+
+#gameDetails {
+    width: 60%;
+}
+
+
 
 /*Desktop*/
     @media all and (min-width: 960px) {
         h1 {
             font-size: 60px;
+        }
+
+        .genreSearchBtn {
+            height: 14rem;
+            width: 14rem;
         }
 
     }
@@ -299,6 +381,14 @@ h5 {
         h5 {
             text-align: center;
         }
+        #gamePics {
+            width: 40%;
+        }
+
+        #gameTextRow {
+
+        }
+
     }
 
     /*Text Alignment for Tablet Up*/
@@ -350,48 +440,3 @@ h5 {
             margin: 0;
         }
     }
-
-
-
-.arrow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background: #1f2833;
-}
-
-.arrow span {
-    display: block;
-    width: 30px;
-    height: 30px;
-    border-bottom: 5px solid #06A8FF;
-    border-right: 5px solid #06A8FF;
-    transform: rotate(45deg);
-    margin: -10px;
-    animation: animate 2s infinite;
-}
-
-.arrow span:nth-child(2) {
-    animation-delay: -0.2s;
-}
-
-.arrow span:nth-child(3) {
-    animation-delay: -0.4s;
-}
-
-@keyframes animate {
-    0% {
-        opacity: 0;
-        transform: rotate(45deg) translate(-20px,-20px);
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform: rotate(45deg) translate(20px,20px);
-    }
-}

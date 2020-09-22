@@ -1,18 +1,18 @@
-﻿@model GameReview.ViewModels.GenreIndexViewModel
+﻿@model IEnumerable<GameReview.Models.Genre>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="text-white">Genres:</h2>
+<div class="divider w-100 mt-n2"></div>
 
-<div class="row justify-content-center">
-    @foreach (var genre in Model.Genres)
+<div class="row justify-content-center m-auto">
+    @foreach (var genre in Model)
     {
+        <div class="col-6 col-md-3 text-center w-75 mt-2 mb-2">
 
-        <div class="col-md-3 text-center w-75 mt-2 mb-2">
-            @Html.ActionLink(genre.Name, "Search", "Game", new {searchFilter = genre.Id.ToString(), searchType = "genre"}, new {type = "button", @class = "btn btn-primary genreSearchBtn border-0 m-2 w-100 h-100 d-flex align-items-center justify-content-center"})
+            @Html.ActionLink(genre.Name, "Search", "Game", new {searchFilter = genre.IgdbId.ToString(), searchType = "genre"}, new {type = "button", @class = "btn btn-primary genreSearchBtn border-0 d-flex align-items-center justify-content-center overlay", style="background-image: url('"+ @genre.BackgroundImgUrl + "')"})
         </div>
     }
 </div>
-

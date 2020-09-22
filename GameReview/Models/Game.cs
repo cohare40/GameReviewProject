@@ -39,6 +39,7 @@ namespace GameReview.Models
         public string FirstReleaseDate { get; set; }
 
         public IEnumerable<string> GenreName { get; set; }
+        public string GenreIds { get; set; }
 
         public IEnumerable<int> Platforms { get; set; }
 
@@ -47,5 +48,6 @@ namespace GameReview.Models
         public string Websites { get; set; }
 
         public IEnumerable<string> InvolvedCompanies{ get; set; }
+
     }
 }

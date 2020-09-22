@@ -8,9 +8,11 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/lib")
-    @Scripts.Render("~/Scripts/scripts.js")
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/gh/coliff/bootstrap-rfs/bootstrap-rfs.css" rel="stylesheet">
+    <script src="https://unpkg.com/@("@")webcreate/infinite-ajax-scroll/dist/infinite-ajax-scroll.min.js"></script>
+    <script src="~/Scripts/scripts.js"></script>
     @RenderSection("scripts", required: false)
 </head>
 <body>
@@ -21,7 +23,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        
+       <input type="hidden" id="token" value="@Html.AntiForgeryToken()"/>
     </footer>
 </div>
 

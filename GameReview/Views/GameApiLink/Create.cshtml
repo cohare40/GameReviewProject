@@ -1,4 +1,4 @@
-﻿@model GameReview.Models.GameApiLink
+﻿@model IEnumerable<GameReview.Models.Game>
 
 @{
     ViewBag.Title = "Create";
@@ -8,41 +8,71 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>GameId</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.GameIdentifier, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.GameIdentifier, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.GameIdentifier, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+<div class="row">
+    <div class="col">
+        <input id="searchBarInput" type="text" class="input-group" placeholder="Enter the game title"/>
+        <input id="searchSubmit" type="submit" value="Save" class="btn btn-default btn-outline-light" />
     </div>
 </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<!--Table to display games-->
+<div class="row">
+    <div id="gamesHolder" class="col">
+        
+    </div>
 </div>
+<div id="loader" class="row">
+    <h1 class="text-white">LOADING</h1>
+</div>
+<div id="finisher" class="row">
+    <h1 class="text-white">DONE</h1>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        jQuery(document).ready(function() {
+            var pageNumber = 0;
+
+            function nextHandler() {
+                jQuery("#loader").show();
+                jQuery.ajax({
+                    url: '@Url.Action("SearchGamesToAddAsync", "GameApiLink")' + '?searchFilter=' + jQuery("#searchBarInput").val() + '&pageNumber=' + pageNumber,
+                    type: 'GET',
+                    success: function(data) {
+                        if (data.trim() != '') 
+                        {
+                            jQuery("#loader").hide();
+                            jQuery('#gamesHolder').append(data);
+                            pageNumber += 1;
+                            console.log(data);
+                        } 
+                        else {
+                            jQuery("#finisher").show();
+                        }
+                    }
+                });
+            }
+
+            jQuery("#searchSubmit").click(function() {
+                jQuery("#finisher").hide();
+                jQuery("#gamesHolder").empty();
+                jQuery.ajax({
+                    url: '@Url.Action("SearchGamesToAddAsync", "GameApiLink")' + '?searchFilter=' + jQuery("#searchBarInput").val() + '&pageNumber=' + pageNumber,
+                    type: 'GET',
+                    success: nextHandler()
+                });
+
+            });
+
+            jQuery(window).scroll(function() {
+                if (jQuery(window).scrollTop() + jQuery(window).height() == jQuery(document).height()) {
+                    nextHandler();
+                }
+            });
+
+
+        })
+    </script>
 }

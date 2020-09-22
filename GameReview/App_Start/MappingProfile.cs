@@ -5,6 +5,7 @@ using System.Web;
 using AutoMapper;
 using GameReview.Dto;
 using GameReview.Models;
+using GameReview.ViewModels;
 
 namespace GameReview.App_Start
 {
@@ -14,6 +15,9 @@ namespace GameReview.App_Start
         {
             Mapper.CreateMap<Review, ReviewDto>();
             Mapper.CreateMap<ReviewDto, Review>();
+
+            Mapper.CreateMap<Game, GameItemViewModel>();
+            Mapper.CreateMap<GameItemViewModel, Game>();
         }
 
 

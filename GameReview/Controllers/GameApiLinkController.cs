@@ -21,6 +21,31 @@ namespace GameReview.Controllers
             return View(await db.Games.ToListAsync());
         }
 
+        [HttpGet]
+        public async Task<ActionResult> SearchGamesToAddAsync(string searchFilter, int pageNumber)
+        {
+            var igdbService = new IGDBService();
+            var games = await igdbService.GetGameToAddSearchResultsAsync(searchFilter, pageNumber);
+
+            return PartialView("ListOfGamesToAdd", games);
+        }
+
+
+        public async Task<ActionResult> AddGameToDb(int id)
+        {
+            var igdbService = new IGDBService();
+                var game = await igdbService.GetGameDetailsAsync(id);
+                var gameApiLink = new GameApiLink
+                {
+                    Name = game.Name, GameIdentifier = game.Id, GenreIds = game.GenreIds
+                };
+
+
+                db.Games.Add(gameApiLink);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+        }
+
         // GET: Games/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -42,22 +67,6 @@ namespace GameReview.Controllers
             return View();
         }
 
-        // POST: Games/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,GameIdentifier,Name")] GameApiLink gameApiLink)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Games.Add(gameApiLink);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(gameApiLink);
-        }
 
         // GET: Games/Edit/5
         public async Task<ActionResult> Edit(int? id)

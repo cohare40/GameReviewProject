@@ -14,6 +14,9 @@ namespace GameReview.Models
         [Required]
         public string Name { get; set; }
 
+        public string GenreIds { get; set; }
+
+
 
     }
 }

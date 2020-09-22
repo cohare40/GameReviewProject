@@ -1,0 +1,31 @@
+﻿@model IEnumerable<GameReview.ViewModels.GameItemViewModel>
+
+
+@foreach (var gameItem in Model)
+{
+    <div id="gameItem" class="d-flex">
+        <div id="gamePics" class="text-center">
+            <img src="@gameItem.Game.CoverArtUrl" class="img-fluid game-thumbs w-50 search-image" />
+            <div class="d-flex flex-wrap align-items-end justify-content-center mt-2">
+                @foreach (var imageUrl in gameItem.PlatformImageUrls)
+                {
+                    <div class="d-flex col-6 col-sm-3">
+                        <img src="@imageUrl" class="search-platform-images" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="gameDetails" class="align-self-center">
+            @Html.ActionLink(gameItem.Game.Name, "Details", "Game", new { id = gameItem.Game.Id }, new { @class = "text-white search-result-title" })<span class="small">@gameItem.Game.FirstReleaseDate</span>
+
+            <div class="d-flex justify-content-start w-100">
+                @foreach (var genre in gameItem.Game.GenreName)
+                {
+                    <button type="button" class="btn btn-primary btn-sm genreBtn border-0 mr-2">@genre</button>
+                }
+            </div>  
+        </div>
+
+    </div>
+    <div class="divider mt-2 mb-2"></div>
+}

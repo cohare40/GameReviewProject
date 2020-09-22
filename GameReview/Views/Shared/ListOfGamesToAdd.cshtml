@@ -1,0 +1,19 @@
+﻿@using GameReview.Models
+@model IEnumerable<GameReview.Models.Game>
+
+@foreach (var game in Model)
+{
+    <div id="gameItem" class="row">
+        <div class="col-3">
+          <img src="@game.CoverArtUrl" class="img-fluid"/>  
+        </div>
+        <div class="col-6">
+            <h1>@game.Name</h1>
+        </div>
+        <div class="col-3">
+            @Html.ActionLink("Add Game", "AddGameToDb", "GameApiLink", new {id = game.Id}, null)
+        </div>
+    </div>
+}
+
+

@@ -41,7 +41,7 @@ namespace GameReview.Models
                         .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                         .ConfigureAwait(false))
                     {
-                        response.EnsureSuccessStatusCode();
+                        //response.EnsureSuccessStatusCode();
 
                         var res = await response.Content.ReadAsStringAsync();
                         var gameJson = JArray.Parse(res);

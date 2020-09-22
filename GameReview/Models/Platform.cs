@@ -12,5 +12,7 @@ namespace GameReview.Models
         public string Name { get; set; }
         public string ImageAddress { get; set; }
         public int ApiGenreId { get; set; }
+
+        public string PlatformDescription { get; set; }
     }
 }

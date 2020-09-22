@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,21 +12,18 @@ namespace GameReview.Controllers
 {
     public class GenreController : Controller
     {
-        // GET: Genre
+        private readonly ApplicationDbContext _context;
+
+        public GenreController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
         public async Task<ActionResult> Index()
         {
+            var genreInDbList = await _context.Genres.ToListAsync();
 
-            var igdbService = new IGDBService();
-
-            var genres = await igdbService.GetAllGenresAsync();
-
-            var viewModel = new GenreIndexViewModel
-            {
-                Genres = genres
-            };
-
-
-            return View(viewModel);
+            return View(genreInDbList);
         }
     }
 }

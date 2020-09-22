@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using Newtonsoft.Json.Linq;
 
 namespace GameReview.Models
@@ -17,14 +15,16 @@ namespace GameReview.Models
         {
             _context = new ApplicationDbContext();
         }
+
         public async Task<Game> GetGameDetailsAsync(int id)
         {
             var formattedJson = "";
             var ageRatingValues = new List<string>();
             var genreValues = new List<string>();
+            var genreIds = new List<string>();
             var companiesValues = new List<string>();
             var platformsValues = new List<int>();
-            string[] coverValues = { };
+            var coverValues = "";
             string[] websiteValues = { };
             var source = new CancellationTokenSource();
             var token = source.Token;
@@ -41,14 +41,19 @@ namespace GameReview.Models
             if (jsonAgeRating.Any())
             {
                 formattedJson = GetPostMessage(jsonAgeRating.First().ToArray());
-                
+
                 var ageRatingPostMsg = $"fields rating; where id = ({formattedJson});";
-                var ageRatingResult = await iGdb.PostBasicAsync(ageRatingPostMsg, token, "https://api-v3.igdb.com/age_ratings");
+                var ageRatingResult =
+                    await iGdb.PostBasicAsync(ageRatingPostMsg, token, "https://api-v3.igdb.com/age_ratings");
                 if (ageRatingResult.Children<JObject>()["rating"].Any())
                 {
-                   var returnedRating = ageRatingResult.Children<JObject>()["rating"];
-                   var values = returnedRating.Values<int>();
-                   ageRatingValues.AddRange(from rating in values select _context.AgeRatings.SingleOrDefault(r => r.AgeRatingApiLink == rating) into ageRatingInDb where ageRatingInDb != null select ageRatingInDb.ImageAddress);
+                    var returnedRating = ageRatingResult.Children<JObject>()["rating"];
+                    var values = returnedRating.Values<int>();
+                    ageRatingValues.AddRange(from rating in values
+                        select _context.AgeRatings.SingleOrDefault(r => r.AgeRatingApiLink == rating)
+                        into ageRatingInDb
+                        where ageRatingInDb != null
+                        select ageRatingInDb.ImageAddress);
                 }
             }
 
@@ -60,30 +65,42 @@ namespace GameReview.Models
                 var genrePostMsg = $"fields name; where id = ({formattedJson});";
                 var genreResult = await iGdb.PostBasicAsync(genrePostMsg, token, "https://api-v3.igdb.com/genres");
                 genreValues = genreResult.Children<JObject>()["name"].Values<string>().ToList();
+                genreIds = genreResult.Children<JObject>()["id"].Values<string>().ToList();
             }
 
             //Companies
-            var jsonCompanies = game.Children<JObject>()["involved_companies"].FirstOrDefault();
+            var jsonCompanies = game.Children<JObject>()["involved_companies"];
             if (jsonCompanies != null)
             {
                 formattedJson = GetPostMessage(jsonCompanies.ToArray());
-                var companiesPostMsg = $"fields name; where id = ({formattedJson});";
-                var companiesResult = await iGdb.PostBasicAsync(companiesPostMsg, token, "https://api-v3.igdb.com/companies");
+                var involvedCompaniesPostMessage = $"fields company; where id = ({formattedJson});";
+                var involvedCompaniesResult = await iGdb.PostBasicAsync(involvedCompaniesPostMessage, token,
+                    "https://api-v3.igdb.com/involved_companies");
+                var companiesIds = involvedCompaniesResult.Children<JObject>()["company"].Values<string>().ToList();
+                var companyJson = ListToString(companiesIds);
+                var companiesPostMsg = $"fields name; where id = ({companyJson});";
+                var companiesResult =
+                    await iGdb.PostBasicAsync(companiesPostMsg, token, "https://api-v3.igdb.com/companies");
                 companiesValues = companiesResult.Children<JObject>()["name"].Values<string>().ToList();
             }
 
             //Platforms
             var jsonPlatforms = game.Children<JObject>()["platforms"].Values();
-            if (jsonPlatforms.Any())
-            {
-                platformsValues.AddRange(jsonPlatforms.Select(platform => platform.Value<int>()));
-            }
+            if (jsonPlatforms.Any()) platformsValues.AddRange(jsonPlatforms.Select(platform => platform.Value<int>()));
 
             //Cover
-            var jsonCover = game.Children<JObject>()["cover"].FirstOrDefault()?.ToString();
-            var coverPostMsg = $"fields url; where id = ({jsonCover});";
-            var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, "https://api-v3.igdb.com/covers");
-            coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToArray();
+            var jsonCover = game.Children<JObject>()["cover"];
+            if (jsonCover != null)
+            {
+                var coverId = jsonCover.First().Value<int>();
+                var coverPostMsg = $"fields url; where id = ({coverId});";
+                var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, "https://api-v3.igdb.com/covers");
+                coverValues = coverResult.Children<JObject>()["url"].First().Value<string>();
+            }
+            else
+            {
+                coverValues = "https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg";
+            }
 
             //Website
             var jsonWebsite = game.Children<JObject>()["websites"];
@@ -97,7 +114,10 @@ namespace GameReview.Models
             }
 
             //Date released
-            var unixTimestamp = game.Children<JObject>()["first_release_date"].First().Value<double>();
+            var jsonTimestamp = game.Children<JObject>()["first_release_date"];
+            var unixTimestamp = 2.0;
+            if (jsonTimestamp.Any())
+                unixTimestamp = game.Children<JObject>()["first_release_date"].First().Value<double>();
 
             //Finalised variables for game
             var gameName = game.Children<JObject>()["name"].First().ToString();
@@ -105,10 +125,9 @@ namespace GameReview.Models
             var gameSummary = game.Children<JObject>()["summary"].FirstOrDefault()?.ToString();
             var gameAgeRating = ageRatingValues;
             var gameGenres = genreValues;
-            var gameCover = coverValues.First().Replace("thumb", "cover_big");
+            var gameCover = coverValues.Replace("thumb", "cover_big");
             var gameWebsite = websiteValues.FirstOrDefault();
             var gameId = game.Children<JObject>()["id"].First().Value<int>();
-
 
 
             var gameObj = new Game
@@ -119,6 +138,7 @@ namespace GameReview.Models
                 Summary = gameSummary,
                 AgeRatingImage = gameAgeRating,
                 GenreName = gameGenres,
+                GenreIds = ListToString(genreIds),
                 InvolvedCompanies = companiesValues,
                 Platforms = platformsValues,
                 CoverArtUrl = gameCover,
@@ -132,7 +152,7 @@ namespace GameReview.Models
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
-            var postContent = $"fields *;";//*
+            var postContent = "fields *;"; //*
 
             var iGdb = new IGDB();
             var genreJArray = await iGdb.PostBasicAsync(postContent, token, "https://api-v3.igdb.com/genres");
@@ -140,26 +160,30 @@ namespace GameReview.Models
             //var genreList = genreJArray.Children<JObject>()["name"].Values<string>().ToList(); //Only returns string name of genres as a list
 
 
-            return (from genreResult in genreJArray let genreId = (int) genreResult.SelectToken("id") let genreName = genreResult.SelectToken("name").ToString() select new Genre {Id = genreId, Name = genreName}).ToList();
+            return (from genreResult in genreJArray
+                let genreId = (int) genreResult.SelectToken("id")
+                let genreName = genreResult.SelectToken("name").ToString()
+                select new Genre {Id = genreId, Name = genreName}).ToList();
         }
 
-        public async Task<IEnumerable<Game>> GetSearchResultsAsync(string idList, string searchFilter, string searchType) //only returns 2 details about game & ID for search results 
+        public async Task<IEnumerable<Game>> GetSearchResultsAsync(string idList, string searchFilter,
+            string searchType) //only returns 2 details about game & ID for search results 
         {
             var source = new CancellationTokenSource();
             var token = source.Token;
             var genreSearchString =
-                $"fields cover, name, id; where id = ({idList}) & genres = ({searchFilter});";
+                $"fields genres, first_release_date, platforms, cover, name, id; where id = ({idList}) & genres = ({searchFilter}); limit 500;";
             var nameSearchString =
-                $"fields cover, name, id; where id = ({idList}) & name = *\"{searchFilter}\"*;";
+                $"fields genres, first_release_date, platforms, cover, name, id; where id = ({idList}) & name = *\"{searchFilter}\"*;";
 
             var iGdb = new IGDB(); //create igdb object to post game info request
             var game = new JArray();
 
             //Case for either name or genre search type
-            switch(searchType) 
+            switch (searchType)
             {
                 case "genre":
-                     game = await iGdb.PostBasicAsync(genreSearchString, token, "https://api-v3.igdb.com/games");
+                    game = await iGdb.PostBasicAsync(genreSearchString, token, "https://api-v3.igdb.com/games");
                     break;
                 case "name":
                     game = await iGdb.PostBasicAsync(nameSearchString, token, "https://api-v3.igdb.com/games");
@@ -167,12 +191,86 @@ namespace GameReview.Models
             }
 
             var gameList = new List<Game>();
-            foreach (var gameJToken in game)//each game has its details assigned to object + added to game list
+            foreach (var gameJToken in game) //each game has its details assigned to object + added to game list
             {
+                var genreValues = new List<string>();
+                var platformsValues = new List<int>();
+                var gameIdValue = 0;
+
                 var jsonCover = gameJToken.SelectToken("cover");
                 var coverPostMsg = $"fields url; where id = ({jsonCover});";
                 var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, "https://api-v3.igdb.com/covers");
                 var coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToArray();
+
+                var gameId = gameJToken.SelectToken("id");
+                if ( gameId != null)
+                     gameIdValue = gameJToken.SelectToken("id").Value<int>();
+
+                var jsonPlatforms = gameJToken.SelectToken("platforms").Values();
+
+                platformsValues.AddRange(jsonPlatforms
+                    .Select(platform => platform
+                        .Value<int>()));
+
+                var firstReleaseDate = gameJToken.Children<JObject>()["first_release_date"].FirstOrDefault();
+                var frdTest = "";
+
+                if (firstReleaseDate != null) frdTest = firstReleaseDate.Value<string>();
+
+                var jsonGenres = gameJToken.SelectToken("genres");
+                if (jsonGenres != null)
+                {
+                    var formattedJson = GetPostMessage(jsonGenres.ToArray());
+                    var genrePostMsg = $"fields name; where id = ({formattedJson});";
+                    var genreResult = await iGdb.PostBasicAsync(genrePostMsg, token, "https://api-v3.igdb.com/genres");
+                    genreValues = genreResult.Children<JObject>()["name"].Values<string>().ToList();
+                }
+
+                var basicGameDetails = new Game
+                {
+                    Id = gameIdValue,
+                    Name = gameJToken["name"].ToString(),
+                    CoverArtUrl = coverValues.First().Replace("thumb", "cover_big"),
+                    Platforms = platformsValues,
+                    FirstReleaseDate = frdTest,
+                    GenreName = genreValues
+                };
+                gameList.Add(basicGameDetails);
+            }
+
+            //returns list of games to be iterated over in search results 
+            return gameList;
+        }
+
+        //Returns all games matching search to be added to db
+        public async Task<IEnumerable<Game>> GetGameToAddSearchResultsAsync(string searchFilter, int pageNumber)
+        {
+            var source = new CancellationTokenSource();
+            var token = source.Token;
+            var nameSearchString =
+                $"fields cover, name, id; where name = *\"{searchFilter}\"*; limit 10; offset {pageNumber * 10};";
+
+            var iGdb = new IGDB(); //create igdb object to post game info request
+            var game = await iGdb.PostBasicAsync(nameSearchString, token, "https://api-v3.igdb.com/games");
+
+            var gameList = new List<Game>();
+            foreach (var gameJToken in game) //each game has its details assigned to object + added to game list
+            {
+                var coverValues = new List<string>();
+                var jsonCover = gameJToken.SelectToken("cover");
+                if (jsonCover != null)
+                {
+                    jsonCover = gameJToken.SelectToken("cover");
+                    var coverPostMsg = $"fields url; where id = ({jsonCover});";
+                    var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, "https://api-v3.igdb.com/covers");
+                    coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToList();
+                }
+                else
+                {
+                    coverValues.Add("https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg");
+                }
+
+
                 var gameId = game.Children<JObject>()["id"].First().Value<int>();
 
                 var basicGameDetails = new Game
@@ -183,6 +281,7 @@ namespace GameReview.Models
                 };
                 gameList.Add(basicGameDetails);
             }
+
             //returns list of games to be iterated over in search results 
             return gameList;
         }
@@ -195,11 +294,17 @@ namespace GameReview.Models
             return formattedJson;
         }
 
+        public string ListToString(List<string> strings) //Formats the values to search for 
+        {
+            var formattedString = string.Join(", ", strings);
+
+            return formattedString;
+        }
+
         private static int ConvertFromUnixTimestamp(double timestamp)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return origin.AddSeconds(timestamp).Year;
         }
     }
 }
-

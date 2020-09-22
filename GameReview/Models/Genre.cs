@@ -9,5 +9,8 @@ namespace GameReview.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public int IgdbId { get; set; }
+        public string BackgroundImgUrl { get; set; }
     }
 }

@@ -5,37 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GenreSearchResult</h2>
+<div class="row">
+    <div class="col">
+        <div id="searchTopImg" class="row overlay"></div>
+
+        <div id="searchContent" class="row">
+            <div class="col">
+                <h2 class="text-white mt-3">
+                    <span id="searchTitleThe">The</span> <span id="searchTitleGame">Games</span>
+                </h2>
+
+                <div class="game-feed">
+                    <div class="divider mt-2 mb-2"></div>
+                </div>
 
 
-<table id="genreSearchResultTable" class="display">
-    <thead>
-        <tr>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var game in Model)
-        {
-            <tr>
-                <td>
-                    <img src="@game.CoverArtUrl" class="img-fluid w-50" />
-                </td>
-                <td>
-                    @Html.ActionLink(game.Name, "Details", "Game", new { @id = game.Id }, new { @class = "fontFam boldFont" })
-                    <h2 class="boldFont fontFam">@game.Name</h2>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--https://localhost:44337/Game/Results?searchFilter=10&searchType=genre&pageNumber=1-->
+
+<input type="hidden" id="ajaxUrl" value="@Url.Action("Results", "Game", new {searchFilter = Request.QueryString["searchFilter"], searchType = Request.QueryString["searchType"], pageNumber = 0})" />
 
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
-            $("#genreSearchResultTable").DataTable();
-        })
-    </script>
+    <script src="~/Scripts/Controller/Game/SearchResultsScript.js"></script>
 }
