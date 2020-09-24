@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using GameReview.Dto;
 using GameReview.Models;
-using Newtonsoft.Json;
 
 namespace GameReview.Controllers.Api
 {

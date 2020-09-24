@@ -6,7 +6,6 @@
 }
 
 
-
 <div id="desktopBlurImage" class="row w-100 m-auto">
     <div id="parrallaxImage" class="w-100"></div>
 </div>
@@ -14,7 +13,7 @@
 <div id="gameInfoRow" class="row">
     <!--Image and platforms-->
     <div class="col-4 text-center game-info-row-blur position-relative">
-        <img src="@Model.Game.CoverArtUrl" id="gameCoverImg" class="img-fluid m-1" />
+        <img src="@Model.Game.CoverArtUrl" id="gameCoverImg" class="img-fluid game-thumbs m-1"/>
         <div class="row m-auto justify-content-around">
             @foreach (var platform in Model.Platforms)
             {
@@ -22,7 +21,7 @@
                     <img src="@platform.ImageAddress" class="img-fluid" alt="@platform.Name"/>
                 </div>
             }
-            
+
 
         </div>
     </div>
@@ -30,7 +29,14 @@
     <div id="titleCol" class="col-8 pr-0 pt-4 pt-xl-0 game-info-row-blur d-flex">
         <div id="gameTextRow" class="row w-100  align-content-center">
 
-            <h1 id="gameTitle" class="text-white boldFonts">@Model.Game.Name<span id="gameReleaseYear" class="boldFonts"> @Model.Game.FirstReleaseDate </span><span id="ratingBadge" class="badge">94%</span></h1>
+            <h1 id="gameTitle" class="text-white boldFonts">
+                @Model.Game.Name<span id="gameReleaseYear" class="boldFonts"> @Model.Game.FirstReleaseDate </span>
+                @if (@Model.AverageRating != 0.0)
+                {
+                    <span id="ratingBadge" class="badge">@Model.AverageRating%</span>
+                }
+                
+            </h1>
             <div class="d-flex justify-content-start w-100">
                 @foreach (var genre in Model.Game.GenreName)
                 {
@@ -63,7 +69,7 @@
                 </div>
             </div>
         }
-        
+
         <div class="line"></div>
         <div class="row w-100 m-auto">
             <div class="col-4 pl-0">
@@ -98,26 +104,195 @@
 </div>
 
 <!--Reviews-->
-<div class="row">
-    <div class="col"><h5 class="text-white boldFonts">Reviews:</h5></div>
+<div class="row d-flex">
+    <div class="col">
+        <h5 class="text-white boldFonts">Reviews:</h5>
+    </div>
+    <div class="col text-center text-md-right">
+        <btn id="addReviewBtn" class="btn btn-primary justify-content-end" type="button" data-toggle="modal" data-target="#addReviewModal">Add Review</btn>
+    </div>
     <div class="row w-100 m-auto">
-        <div class="col-sm-4 w-90 m-auto">
-            <div class="card reviewCard">
-                <div class="card-header darkBlue">
-                    <div class="row">
-                        <div class="col-3">
-                            <img src="https://assets.manutd.com/AssetPicker/images/0/0/10/126/687734/Legends-Profile_George-Best21523521860789_thumb.jpg" class="img-fluid" />
+        @foreach (var review in Model.Reviews)
+        {
+            <div class="col-12 col-md-4 w-90 m-auto">
+                <div class="card reviewCard">
+                    <div class="card-header darkBlue">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="@review.User.ProfilePic" class="img-fluid"/>
+                            </div>
+                            <div class="col-9">
+                                <p>@review.User.FirstName</p>
+                            </div>
                         </div>
-                        <div class="col-9">
-                            <p>Person Name</p>
+                    </div>
+                    <div class="card-body navy">
+                        
+                        <div class="float-left">
+
+                            @if (review.RatingScore == 5)
+                            {
+                                @Html.RadioButton(@review.Id + "star5", 5, new { @class = "star star-5", id = @review.Id + "star5", name = "", @checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButton(@review.Id + "star5", 5, new { @class = "star star-5", id = @review.Id + "star5", name = "", disabled = "disabled" })
+                            }
+                            @Html.Label(" ", new { @class = "star star-5", @for = @review.Id + "star5" })
+
+
+                            @if (review.RatingScore == 4)
+                            {
+                                @Html.RadioButton(@review.Id + "star4", 4, new { @class = "star star-4", id = @review.Id + "star4", name = "", @checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButton(@review.Id + "star4", 4, new { @class = "star star-4", id = @review.Id + "star4", name = "", disabled = "disabled" })
+                            }
+                            @Html.Label(" ", new { @class = "star star-4", @for = @review.Id + "star4" })
+
+                            @if (review.RatingScore == 3)
+                            {
+                                @Html.RadioButton(@review.Id + "star3", 3, new { @class = "star star-3", id = @review.Id + "star3", name = "", @checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButton(@review.Id + "star3", 3, new { @class = "star star-3", id = @review.Id + "star3", name = "", disabled = "disabled" })
+                            }
+                            @Html.Label(" ", new { @class = "star star-3", @for = @review.Id + "star3" })
+
+                            @if (review.RatingScore == 2)
+                            {
+                                @Html.RadioButton(@review.Id + "star2", 2, new { @class = "star star-2", id = @review.Id + "star2", name = "", @checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButton(@review.Id + "star2", 2, new { @class = "star star-2", id = @review.Id + "star2", name = "", disabled = "disabled" })
+                            }
+                            @Html.Label(" ", new { @class = "star star-2", @for = @review.Id + "star2" })
+
+                            @if (review.RatingScore == 1)
+                            {
+                                @Html.RadioButton(@review.Id + "star1", 1, new { @class = "star star1", id = @review.Id + "star1", name = "", @checked = "checked" })
+                            }
+                            else
+                            {
+                                @Html.RadioButton(@review.Id + "star1", 1, new { @class = "star star-1", id = @review.Id + "star1", name = "", disabled = "disabled" })
+                            }
+                            @Html.Label(" ", new { @class = "star star-1", @for = @review.Id + "star5" })
+                        </div>
+
+                        <div>
+                            <div class="form-group align-items-end">
+                                <p class="card-text text-white">@review.ReviewText</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body navy">
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
             </div>
+        }
+        
+    </div>
+</div>
+
+
+<div id="addReviewModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="reviewModalHeader" class="modal-header">
+                <h5 class="modal-title">Add Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="reviewModalBody" class="modal-body">
+                @using (Html.BeginForm("", "", FormMethod.Post, new {id="reviewForm"}))
+                {
+
+
+                    <div>
+                        @Html.LabelFor(r => r.CreateReview.RatingScore, new { @class = "control-label text-white h5 boldFonts" })
+                    </div>
+                    <div class="form-group d-flex ">
+                        <div class="float-left">
+                            @Html.RadioButton("star", 5, new { @class = "star star-5", id = "star-5", name = "star" })
+                            @Html.Label(" ", new { @class = "star star-5", @for = "star-5" })
+
+                            @Html.RadioButton("star", 4, new { @class = "star star-4", id = "star-4", name = "star" })
+                            @Html.Label(" ", new { @class = "star star-4", @for = "star-4" })
+
+                            @Html.RadioButton("star", 3, new { @class = "star star-3", id = "star-3", name = "star" })
+                            @Html.Label(" ", new { @class = "star star-3", @for = "star-3" })
+
+                            @Html.RadioButton("star", 2, new { @class = "star star-2", id = "star-2", name = "star" })
+                            @Html.Label(" ", new { @class = "star star-2", @for = "star-2" })
+
+                            @Html.RadioButton("star", 1, new { @class = "star star-1", id = "star-1", name = "star" })
+                            @Html.Label(" ", new { @class = "star star-1", @for = "star-1" })
+                        </div>
+                    </div>     
+                    
+                    <div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(r => r.CreateReview.ReviewText, new { @class = "control-label text-white h5 boldFonts" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextAreaFor(r => r.CreateReview.ReviewText, new {@class = "form-control", id="reviewText" })
+                            @Html.ValidationMessageFor(r => r.CreateReview.ReviewText, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                        
+                }
+                <div class="form-group d-flex align-content-end">
+                    <button id="submitReview" class="btn btn-primary">Submit Review</button>
+                </div> 
+            </div>
+
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script src="~/Scripts/Controller/Game/GameDetailsScript.js"></script>
+}
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery("#submitReview").click(function() {
+            var rating = jQuery('input[name=star]:checked').val();
+            var text = jQuery("#reviewText").val();
+            var userId = "@HttpContext.Current.User.Identity.GetUserId()";
+            var gameId = @Model.Game.Id; 
+            var reviewJson = {
+                UserId: userId,
+                ReviewText: text,
+                RatingScore: rating,
+                gameId: gameId
+            };
+            var json = JSON.stringify(reviewJson);
+            console.log(json);
+            jQuery.ajax({
+                dataType: 'json',
+                type: 'POST',
+                url: '/api/reviews/',
+                data: json,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    //clear model, exit it and display bootbox pop up saying submitted
+                    jQuery("#addReviewModal").modal('hide');
+                    jQuery('#reviewForm').trigger("reset");
+                    bootbox.alert("Your review has been submitted");
+                },
+                error: function() {
+                    console.log("error again!");
+                    console.log(data);
+                }
+            });
+            
+             
+        });
+    });
+</script>

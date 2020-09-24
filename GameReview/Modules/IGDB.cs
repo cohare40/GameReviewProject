@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GameReview.Models
+namespace GameReview.Modules
 {
     public class IGDB
     {
@@ -41,11 +37,11 @@ namespace GameReview.Models
                         .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
                         .ConfigureAwait(false))
                     {
-                        //response.EnsureSuccessStatusCode();
+
+                        response.EnsureSuccessStatusCode();
 
                         var res = await response.Content.ReadAsStringAsync();
                         var gameJson = JArray.Parse(res);
-
 
                         return gameJson;
                     }

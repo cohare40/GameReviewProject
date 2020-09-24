@@ -1,18 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using GameReview.Models;
+using GameReview.Modules;
 
 namespace GameReview.ViewModels
 {
-    public class GameDetailsViewModel 
+    public class GameDetailsViewModel
     {
-        public Game Game { get; set; }
-        public Review Review1 { get; set; }
-        public List<Review> Review { get; set; }
-        public List<ApplicationUser> User { get; set;}
+        public GameDetailsViewModel(Game game)
+        {
+            var gameService = new DbService();
+            Game = game;
+            Reviews = gameService.GetReviews(game.Id);
+            Platforms = gameService.GetPlatforms(game.Platforms);
+            if (Reviews.Any())
+            {
+                AverageRating = Reviews
+                    .Select(r => r.RatingScore)
+                    .AsQueryable()
+                    .Average();
+            }
+        }
 
+
+        public Game Game { get; set; }
+        public Review CreateReview { get; set; }
+
+        public List<Review> Reviews { get; set; }
         public List<Platform> Platforms { get; set; }
+        public double AverageRating { get; set; } = 0;
     }
 }

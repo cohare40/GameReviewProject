@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using AutoMapper;
 using GameReview.Models;
 
 namespace GameReview.ViewModels
@@ -18,7 +15,7 @@ namespace GameReview.ViewModels
         {
             Game = game;
             PlatformImageUrls = Game.Platforms
-                .Select(platform => context.Platforms.SingleOrDefault(p => p.ApiGenreId == platform))
+                .Select(platform => context.Platforms.SingleOrDefault(p => p.ApiPlatformId == platform))
                 .Where(platformToAdd => platformToAdd != null)
                 .Select(p => p.ImageAddress)
                 .ToList();

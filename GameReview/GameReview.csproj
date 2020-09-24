@@ -306,17 +306,23 @@
     <Compile Include="Migrations\202009220915216_SeedGenre.Designer.cs">
       <DependentUpon>202009220915216_SeedGenre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009231635224_RejigTables.cs" />
+    <Compile Include="Migrations\202009231635224_RejigTables.Designer.cs">
+      <DependentUpon>202009231635224_RejigTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Extensions\Extensions.cs" />
+    <Compile Include="Modules\DbService.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\AgeRating.cs" />
-    <Compile Include="Models\Extensions\IdentityExtensions.cs" />
+    <Compile Include="Modules\IdentityExtensions.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameApiLink.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\IGDB.cs" />
-    <Compile Include="Models\IGDBService.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Modules\IGDB.cs" />
+    <Compile Include="Modules\IGDBService.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SubmittedGameId.cs" />
@@ -520,6 +526,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Controller\Game\GameDetailsScript.js" />
     <Content Include="Scripts\Controller\Game\SearchResultsScript.js" />
     <Content Include="Scripts\copy_csv_xls_pdf.swf" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -807,7 +814,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -904,6 +910,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009220915216_SeedGenre.resx">
       <DependentUpon>202009220915216_SeedGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009231635224_RejigTables.resx">
+      <DependentUpon>202009231635224_RejigTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

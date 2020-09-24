@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace GameReview
 {
@@ -24,7 +23,7 @@ namespace GameReview
                 "~/Scripts/Slick/slick.js",
                 "~/Scripts/Datatables/jquery.dataTables.js",
                 "~/Scripts/Datatables/dataTables.bootstrap4.js"
-                ));
+            ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
