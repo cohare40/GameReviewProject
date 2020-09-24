@@ -18,7 +18,7 @@ namespace GameReview.Dto
         [Required]
         public int RatingScore { get; set; }
 
-        [Required] public int gameId { get; set; }
+        [Required] public int GameId { get; set; }
 
         public ApplicationUser User { get; set; }
     }
