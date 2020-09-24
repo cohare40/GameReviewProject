@@ -231,7 +231,7 @@ namespace GameReview.Modules
                 {
                     var formattedJson = GetPostMessage(jsonGenres.ToArray());
                     var genrePostMsg = $"fields name; where id = ({formattedJson});";
-                    var genreResult = await iGdb.PostBasicAsync(genrePostMsg, token, CoversUrl);
+                    var genreResult = await iGdb.PostBasicAsync(genrePostMsg, token, GenreUrl);
                     genreValues = genreResult.Children<JObject>()["name"].Values<string>().ToList();
                 }
 
