@@ -4,6 +4,8 @@ using System.Web.Http;
 using AutoMapper;
 using GameReview.Dto;
 using GameReview.Models;
+using Microsoft.Ajax.Utilities;
+using WebGrease.Css.Extensions;
 
 namespace GameReview.Controllers.Api
 {
@@ -45,6 +47,15 @@ namespace GameReview.Controllers.Api
             var review = Mapper.Map<ReviewDto, Review>(reviewDto);
 
             _context.Reviews.Add(review);
+            _context.SaveChanges();
+
+            var averageRating = _context.Reviews
+                .Where(r => r.GameId == review.GameId)
+                .Average(r => r.RatingScore);
+
+            var gameInDb = _context.Games.SingleOrDefault(r => r.GameIdentifier == review.GameId);
+
+            if (gameInDb != null) gameInDb.AverageRating = averageRating;
             _context.SaveChanges();
 
             return Created(new Uri(Request.RequestUri + "/" + review.Id), reviewDto);

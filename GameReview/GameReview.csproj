@@ -310,6 +310,14 @@
     <Compile Include="Migrations\202009231635224_RejigTables.Designer.cs">
       <DependentUpon>202009231635224_RejigTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009241517247_SeedGames.cs" />
+    <Compile Include="Migrations\202009241517247_SeedGames.Designer.cs">
+      <DependentUpon>202009241517247_SeedGames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009252041212_ChangeAverageRatingToColumn.cs" />
+    <Compile Include="Migrations\202009252041212_ChangeAverageRatingToColumn.Designer.cs">
+      <DependentUpon>202009252041212_ChangeAverageRatingToColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Extensions\Extensions.cs" />
     <Compile Include="Modules\DbService.cs" />
@@ -913,6 +921,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009231635224_RejigTables.resx">
       <DependentUpon>202009231635224_RejigTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009241517247_SeedGames.resx">
+      <DependentUpon>202009241517247_SeedGames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009252041212_ChangeAverageRatingToColumn.resx">
+      <DependentUpon>202009252041212_ChangeAverageRatingToColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

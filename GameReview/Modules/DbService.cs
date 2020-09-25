@@ -35,5 +35,19 @@ namespace GameReview.Modules
                 .Where(p => platformIds.Contains(p.ApiPlatformId))
                 .ToList();
         }
+
+        public double GetAverageRating(int gameId)
+        {
+            return _context.Games
+                    .SingleOrDefault(g => g.GameIdentifier == gameId)
+                    .AverageRating;
+        }
+
+        public IEnumerable<int> GetTopGames()
+        {
+            return _context.Games
+                .OrderByDescending(r => r.AverageRating)
+                .Select(g => g.GameIdentifier).Take(6).ToList();
+        }
     }
 }

@@ -30,7 +30,7 @@
         <div id="gameTextRow" class="row w-100  align-content-center">
 
             <h1 id="gameTitle" class="text-white boldFonts">
-                @Model.Game.Name<span id="gameReleaseYear" class="boldFonts"> @Model.Game.FirstReleaseDate </span>
+                @Model.Game.Name<span id="gameReleaseYear"> (@Model.Game.FirstReleaseDate)</span>
                 @if (@Model.AverageRating != 0.0)
                 {
                     <span id="ratingBadge" class="badge">@Model.AverageRating%</span>

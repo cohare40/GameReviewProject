@@ -15,10 +15,7 @@ namespace GameReview.ViewModels
             Platforms = gameService.GetPlatforms(game.Platforms);
             if (Reviews.Any())
             {
-                AverageRating = Reviews
-                    .Select(r => r.RatingScore)
-                    .AsQueryable()
-                    .Average();
+                AverageRating = gameService.GetAverageRating(game.Id);
             }
         }
 

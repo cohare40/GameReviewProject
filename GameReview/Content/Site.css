@@ -65,6 +65,8 @@ textarea {
 #gameReleaseYear{
     color: lightgray;
     text-decoration: none;
+    font-size: 18pt;
+    font-weight: 100;
 }
 
 #ratingBadge {
@@ -424,6 +426,11 @@ label.star:before {
         .genreSearchBtn {
             height: 14rem;
             width: 14rem;
+        }
+
+        #gameReleaseYear {
+            font-size: 25pt;
+
         }
 
     }

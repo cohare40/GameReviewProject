@@ -12,7 +12,7 @@ namespace GameReview.Models
 
         public string GenreIds { get; set; }
 
-
+        public double AverageRating { get; set; }
 
     }
 }
