@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using GameReview.Models;
 using GameReview.Modules;
 
@@ -13,13 +14,18 @@ namespace GameReview.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var gameService = new DbService();
+            var igdbService = new IGDBService();
 
-            var test = gameService.GetTopGames();
+            //Get list of ids of top rated games in db
+            var topRatedGameIds = gameService.GetTopGames();
 
-            return View();
+            var topRatedGames = await igdbService.GetTopRatedGamesAsync(topRatedGameIds);
+
+
+            return View("Index",topRatedGames);
         }
 
         public ActionResult About()

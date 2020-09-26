@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<GameReview.Models.Game>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -43,30 +45,14 @@
     </div>
     <div class="col-md-7 order-1 order-md-2">
         <div class="row">
-            <div class="col-4">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1rse.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-4">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co28g1.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-4">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2a5n.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-4">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2ade.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-4">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co20r3.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-4">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1tgt.jpg" class="img-fluid mb-2 mt-3 game-thumbs "/>
-
-            </div>
+            @foreach (var game in Model)
+            {
+                <div class="col-4">
+                    <a href="@Url.Action("Details", "Game", new { id = game.Id})">
+                        <img alt="" src="@Url.Content(@game.CoverArtUrl)" class="img-fluid mb-2 mt-3 game-thumbs">
+                    </a>
+                </div>
+            }
         </div>
     </div>
 </div>

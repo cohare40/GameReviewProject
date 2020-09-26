@@ -295,6 +295,51 @@ namespace GameReview.Modules
             return gameList;
         }
 
+        //Get "x" number of games, used for getting top rated games
+        public async Task<IEnumerable<Game>> GetTopRatedGamesAsync(IEnumerable<int> idList)
+        {
+            var source = new CancellationTokenSource();
+            var token = source.Token;
+            var formattedString = string.Join(", ", idList);
+
+            var topRatedSearchString =
+                $"fields cover, id; where id = ({formattedString});";
+
+            var iGdb = new IGDB(); //create igdb object to post game info request
+            var game = await iGdb.PostBasicAsync(topRatedSearchString, token, "https://api-v3.igdb.com/games");
+
+            var gameList = new List<Game>();
+            foreach (var gameJToken in game) //each game has its details assigned to object + added to game list
+            {
+                var coverValues = new List<string>();
+                var jsonCover = gameJToken.SelectToken("cover");
+                if (jsonCover != null)
+                {
+                    jsonCover = gameJToken.SelectToken("cover");
+                    var coverPostMsg = $"fields url; where id = ({jsonCover});";
+                    var coverResult = await iGdb.PostBasicAsync(coverPostMsg, token, CoversUrl);
+                    coverValues = coverResult.Children<JObject>()["url"].Values<string>().ToList();
+                }
+                else
+                {
+                    coverValues.Add("https://sisterhoodofstyle.com/wp-content/uploads/2018/02/no-image-1.jpg");
+                }
+
+
+                var gameId = gameJToken.SelectToken("id").Value<int>();
+
+                var basicGameDetails = new Game
+                {
+                    Id = gameId,
+                    CoverArtUrl = coverValues.First().Replace("thumb", "cover_big")
+                };
+                gameList.Add(basicGameDetails);
+            }
+
+            //returns list of games to be iterated over in search results 
+            return gameList;
+        }
+
         public string GetPostMessage(JToken[] json) //Formats the values to search for 
         {
             var jsonToList = json.Values<string>().ToList();
