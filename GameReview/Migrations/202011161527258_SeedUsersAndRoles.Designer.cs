@@ -7,13 +7,13 @@ namespace GameReview.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SeedUsers : IMigrationMetadata
+    public sealed partial class SeedUsersAndRoles : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedUsers));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedUsersAndRoles));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011151408559_SeedUsers"; }
+            get { return "202011161527258_SeedUsersAndRoles"; }
         }
         
         string IMigrationMetadata.Source

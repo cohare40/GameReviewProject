@@ -9,7 +9,7 @@ using GameReview.Modules;
 
 namespace GameReview.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class GameApiLinkController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

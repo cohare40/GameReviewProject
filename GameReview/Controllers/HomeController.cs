@@ -53,12 +53,8 @@ namespace GameReview.Controllers
                     .Take(6),
                 DiscoverGames = discoverGameItems
             };
-            Version vs = Environment.Version;
-            Response.Write(vs.ToString());
 
             return View("Index", viewModel);
         }
-
-
     }
 }

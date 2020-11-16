@@ -322,9 +322,17 @@
     <Compile Include="Migrations\202011051425303_AddPlatformValues.Designer.cs">
       <DependentUpon>202011051425303_AddPlatformValues.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011151408559_SeedUsers.cs" />
-    <Compile Include="Migrations\202011151408559_SeedUsers.Designer.cs">
-      <DependentUpon>202011151408559_SeedUsers.cs</DependentUpon>
+    <Compile Include="Migrations\202011161527258_SeedUsersAndRoles.cs" />
+    <Compile Include="Migrations\202011161527258_SeedUsersAndRoles.Designer.cs">
+      <DependentUpon>202011161527258_SeedUsersAndRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011161551598_SeedReviews.cs" />
+    <Compile Include="Migrations\202011161551598_SeedReviews.Designer.cs">
+      <DependentUpon>202011161551598_SeedReviews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011161637176_RemoveProfilePic.cs" />
+    <Compile Include="Migrations\202011161637176_RemoveProfilePic.Designer.cs">
+      <DependentUpon>202011161637176_RemoveProfilePic.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Extensions\Extensions.cs" />
@@ -940,8 +948,14 @@
     <EmbeddedResource Include="Migrations\202011051425303_AddPlatformValues.resx">
       <DependentUpon>202011051425303_AddPlatformValues.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011151408559_SeedUsers.resx">
-      <DependentUpon>202011151408559_SeedUsers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011161527258_SeedUsersAndRoles.resx">
+      <DependentUpon>202011161527258_SeedUsersAndRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011161551598_SeedReviews.resx">
+      <DependentUpon>202011161551598_SeedReviews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011161637176_RemoveProfilePic.resx">
+      <DependentUpon>202011161637176_RemoveProfilePic.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

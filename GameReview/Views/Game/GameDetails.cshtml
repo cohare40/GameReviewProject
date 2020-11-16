@@ -98,16 +98,15 @@
 
     <div class="col-md-4 h-100">
         <h5 class="text-white boldFonts">Ratings Breakdown:</h5>
-        @if (Model.Reviews.Count > 0)
+        @if (Model.Reviews.Count == 0)
         {
             <h5 class="h5 text-white text-center">No reviews have been submitted for this game.</h5>
         }
         else
         {
             <canvas id="myChart"></canvas>
-            <div class="line"></div> 
         }
-        
+    <div class="line"></div>
     </div>
 </div>
 
@@ -126,21 +125,17 @@
         }
         @foreach (var review in Model.Reviews)
         {
-            <div class="col-12 col-md-4 w-90 m-auto">
+            <div class="col-12 col-md-4 w-90 m-auto pt-2">
                 <div class="card reviewCard">
                     <div class="card-header darkBlue">
                         <div class="row">
-                            <div class="col-3">
-                                <img src="@review.User.ProfilePic" class="img-fluid"/>
-                            </div>
-                            <div class="col-9">
-                                <p>@review.User.FirstName</p>
+                            <div class="col">
+                                <p class="h4 text-white">@review.User.FirstName</p>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body navy">
-
-                        <div class="float-left">
+                    <div class=" navy d-flex justify-content-center">
+                        <div>
 
                             @if (review.RatingScore == 100)
                             {
@@ -193,13 +188,10 @@
                             }
                             @Html.Label(" ", new {@class = "star star-1", @for = @review.Id + "star5"})
                         </div>
-
-                        <div>
-                            <div class="form-group align-items-end">
-                                <p class="card-text text-white">@review.ReviewText</p>
-                            </div>
-                        </div>
                     </div>
+                        <div class="navy">
+                            <p class="card-text text-white text-center p-2 mb-3">@review.ReviewText</p>
+                        </div>
                 </div>
             </div>
         }

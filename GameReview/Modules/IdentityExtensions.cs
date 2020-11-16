@@ -7,7 +7,7 @@ namespace GameReview.Modules
         {
             public static string GetUserFirstname(this IIdentity identity)
             {
-                var claim = ((ClaimsIdentity)identity).FindFirst("FirstName");
+                var claim = ((ClaimsIdentity)identity).FindFirst(ClaimTypes.GivenName);
                 // Test for null to avoid issues during local testing
                 return (claim != null) ? claim.Value : string.Empty;
             }
