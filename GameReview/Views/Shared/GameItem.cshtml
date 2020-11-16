@@ -16,16 +16,24 @@
             </div>
         </div>
         <div id="gameDetails" class="align-self-center">
-            @Html.ActionLink(gameItem.Game.Name, "Details", "Game", new { id = gameItem.Game.Id }, new { @class = "text-white search-result-title" })<span class="small">@gameItem.Game.FirstReleaseDate</span>
+            @Html.ActionLink(gameItem.Game.Name, "Details", "Game", new { id = gameItem.Game.Id }, new { @class = "text-white search-result-title" })<span id="gameResultDate" class="small ml-2">@gameItem.Game.FirstReleaseDate</span>
 
             <div class="d-flex justify-content-start w-100">
                 @foreach (var genre in gameItem.Game.GenreName)
                 {
                     <button type="button" class="btn btn-primary btn-sm genreBtn border-0 mr-2">@genre</button>
                 }
-            </div>  
+            </div>
         </div>
-
+        @if (gameItem.AverageRating > 0)
+        {
+            <div class="justify-content-end align-self-center">
+                <h3>
+                    <span id="ratingBadge" class="badge">@gameItem.AverageRating%</span>
+                </h3>
+            </div>
+        }
+        
     </div>
     <div class="divider mt-2 mb-2"></div>
 }

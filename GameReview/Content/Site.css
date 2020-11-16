@@ -417,6 +417,20 @@ label.star:before {
     content: '\2605';
 }
 
+#gameResultDate {
+    color: lightgray;
+    vertical-align: top;
+}
+
+#deleteGameApiLinkBtn {
+    color: red;
+}
+
+.loading-texts {
+    letter-spacing: 0.2rem;
+}
+
+
 /*Desktop*/
     @media all and (min-width: 960px) {
         h1 {

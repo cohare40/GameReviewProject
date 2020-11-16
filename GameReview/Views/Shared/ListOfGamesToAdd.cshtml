@@ -2,17 +2,19 @@
 
 @foreach (var game in Model)
 {
-    <div id="gameItem" class="row">
-        <div class="col-3">
-          <img src="@game.CoverArtUrl" class="img-fluid"/>  
+
+    <div id="gameItem" class="d-flex">
+        <div id="gamePics" class="text-center">
+            <img src="@game.CoverArtUrl" class="img-fluid game-thumbs w-50 search-image" />
         </div>
-        <div class="col-6">
-            <h1>@game.Name</h1>
+        <div id="gameDetails" class="align-self-center">
+            @Html.ActionLink(game.Name, "Details", "Game", new { id = game.Id }, new { @class = "text-white search-result-title" })<span id="gameResultDate" class="small ml-2">@game.FirstReleaseDate</span>
         </div>
-        <div class="col-3">
-            @Html.ActionLink("Add Game", "AddGameToDb", "GameApiLink", new {id = game.Id}, null)
+        <div class="justify-content-end align-self-center">
+            @Html.ActionLink("Add Game", "AddGameToDb", "GameApiLink", new { id = game.Id }, new{@class = "btn btn-outline-light"})
         </div>
     </div>
+    <div class="divider mt-2 mb-2"></div>
 }
 
 

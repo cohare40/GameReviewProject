@@ -6,6 +6,8 @@ namespace GameReview.Models
     {
         public int Id { get; set; }
         [Required]
+
+        [Display (Name = "GameID")]
         public int GameIdentifier { get; set; }
         [Required]
         public string Name { get; set; }

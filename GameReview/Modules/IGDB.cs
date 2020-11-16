@@ -19,7 +19,8 @@ namespace GameReview.Modules
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-            _client.DefaultRequestHeaders.Add("user-key", "ab7dfbb5109671ce6f3ff1fdf7969166");
+            _client.DefaultRequestHeaders.Add("Client-ID", "9kztw06pcdhoib5z0w6ysmjlcgn5q9");
+            _client.DefaultRequestHeaders.Add("Authorization", "Bearer 8sxqlcpx1zyar8itwomvrkbejx7zpa");
         }
 
 
@@ -38,7 +39,7 @@ namespace GameReview.Modules
                         .ConfigureAwait(false))
                     {
 
-                        response.EnsureSuccessStatusCode();
+                        //response.EnsureSuccessStatusCode();
 
                         var res = await response.Content.ReadAsStringAsync();
                         var gameJson = JArray.Parse(res);

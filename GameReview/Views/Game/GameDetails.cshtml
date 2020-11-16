@@ -40,7 +40,7 @@
             <div class="d-flex justify-content-start w-100">
                 @foreach (var genre in Model.Game.GenreName)
                 {
-                    <button type="button" class="btn btn-primary btn-sm genreBtn border-0 ml-1 mr-2">@genre</button>
+                    <span id="ratingBadge" class="badge border-0 ml-1 mr-2">@genre</span>
                 }
 
 
@@ -98,8 +98,16 @@
 
     <div class="col-md-4 h-100">
         <h5 class="text-white boldFonts">Ratings Breakdown:</h5>
-        <canvas id="myChart"></canvas>
-        <div class="line"></div>
+        @if (Model.Reviews.Count > 0)
+        {
+            <h5 class="h5 text-white text-center">No reviews have been submitted for this game.</h5>
+        }
+        else
+        {
+            <canvas id="myChart"></canvas>
+            <div class="line"></div> 
+        }
+        
     </div>
 </div>
 
@@ -109,9 +117,13 @@
         <h5 class="text-white boldFonts">Reviews:</h5>
     </div>
     <div class="col text-center text-md-right">
-        <btn id="addReviewBtn" class="btn btn-primary justify-content-end" type="button" data-toggle="modal" data-target="#addReviewModal">Add Review</btn>
+        <btn id="addReviewBtn" class="btn btn-primary gen-button justify-content-end" type="button" data-toggle="modal" data-target="#addReviewModal">Add Review</btn>
     </div>
     <div class="row w-100 m-auto">
+        @if (Model.Reviews.Count == 0)
+        {
+            <h2 class="h2 text-white text-center w-50 m-auto">No reviews have been submitted for this game.</h2>
+        }
         @foreach (var review in Model.Reviews)
         {
             <div class="col-12 col-md-4 w-90 m-auto">
@@ -127,59 +139,59 @@
                         </div>
                     </div>
                     <div class="card-body navy">
-                        
+
                         <div class="float-left">
 
                             @if (review.RatingScore == 100)
                             {
-                                @Html.RadioButton(@review.Id + "star5", 100, new { @class = "star star-5", id = @review.Id + "star5", name = "", @checked = "checked" })
+                                @Html.RadioButton(@review.Id + "star5", 100, new {@class = "star star-5", id = @review.Id + "star5", name = "", @checked = "checked"})
                             }
                             else
                             {
-                                @Html.RadioButton(@review.Id + "star5", 100, new { @class = "star star-5", id = @review.Id + "star5", name = "", disabled = "disabled" })
+                                @Html.RadioButton(@review.Id + "star5", 100, new {@class = "star star-5", id = @review.Id + "star5", name = "", disabled = "disabled"})
                             }
-                            @Html.Label(" ", new { @class = "star star-5", @for = @review.Id + "star5" })
+                            @Html.Label(" ", new {@class = "star star-5", @for = @review.Id + "star5"})
 
 
                             @if (review.RatingScore == 80)
                             {
-                                @Html.RadioButton(@review.Id + "star4", 80, new { @class = "star star-4", id = @review.Id + "star4", name = "", @checked = "checked" })
+                                @Html.RadioButton(@review.Id + "star4", 80, new {@class = "star star-4", id = @review.Id + "star4", name = "", @checked = "checked"})
                             }
                             else
                             {
-                                @Html.RadioButton(@review.Id + "star4", 80, new { @class = "star star-4", id = @review.Id + "star4", name = "", disabled = "disabled" })
+                                @Html.RadioButton(@review.Id + "star4", 80, new {@class = "star star-4", id = @review.Id + "star4", name = "", disabled = "disabled"})
                             }
-                            @Html.Label(" ", new { @class = "star star-4", @for = @review.Id + "star4" })
+                            @Html.Label(" ", new {@class = "star star-4", @for = @review.Id + "star4"})
 
                             @if (review.RatingScore == 60)
                             {
-                                @Html.RadioButton(@review.Id + "star3", 60, new { @class = "star star-3", id = @review.Id + "star3", name = "", @checked = "checked" })
+                                @Html.RadioButton(@review.Id + "star3", 60, new {@class = "star star-3", id = @review.Id + "star3", name = "", @checked = "checked"})
                             }
                             else
                             {
-                                @Html.RadioButton(@review.Id + "star3", 60, new { @class = "star star-3", id = @review.Id + "star3", name = "", disabled = "disabled" })
+                                @Html.RadioButton(@review.Id + "star3", 60, new {@class = "star star-3", id = @review.Id + "star3", name = "", disabled = "disabled"})
                             }
-                            @Html.Label(" ", new { @class = "star star-3", @for = @review.Id + "star3" })
+                            @Html.Label(" ", new {@class = "star star-3", @for = @review.Id + "star3"})
 
                             @if (review.RatingScore == 40)
                             {
-                                @Html.RadioButton(@review.Id + "star2", 40, new { @class = "star star-2", id = @review.Id + "star2", name = "", @checked = "checked" })
+                                @Html.RadioButton(@review.Id + "star2", 40, new {@class = "star star-2", id = @review.Id + "star2", name = "", @checked = "checked"})
                             }
                             else
                             {
-                                @Html.RadioButton(@review.Id + "star2", 40, new { @class = "star star-2", id = @review.Id + "star2", name = "", disabled = "disabled" })
+                                @Html.RadioButton(@review.Id + "star2", 40, new {@class = "star star-2", id = @review.Id + "star2", name = "", disabled = "disabled"})
                             }
-                            @Html.Label(" ", new { @class = "star star-2", @for = @review.Id + "star2" })
+                            @Html.Label(" ", new {@class = "star star-2", @for = @review.Id + "star2"})
 
                             @if (review.RatingScore == 20)
                             {
-                                @Html.RadioButton(@review.Id + "star1", 20, new { @class = "star star1", id = @review.Id + "star1", name = "", @checked = "checked" })
+                                @Html.RadioButton(@review.Id + "star1", 20, new {@class = "star star1", id = @review.Id + "star1", name = "", @checked = "checked"})
                             }
                             else
                             {
-                                @Html.RadioButton(@review.Id + "star1", 20, new { @class = "star star-1", id = @review.Id + "star1", name = "", disabled = "disabled" })
+                                @Html.RadioButton(@review.Id + "star1", 20, new {@class = "star star-1", id = @review.Id + "star1", name = "", disabled = "disabled"})
                             }
-                            @Html.Label(" ", new { @class = "star star-1", @for = @review.Id + "star5" })
+                            @Html.Label(" ", new {@class = "star star-1", @for = @review.Id + "star5"})
                         </div>
 
                         <div>
@@ -191,7 +203,7 @@
                 </div>
             </div>
         }
-        
+
     </div>
 </div>
 
@@ -298,7 +310,7 @@
                     console.log(data);
                 }
             });
-            
+            location.reload();
              
         });
     });

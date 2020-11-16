@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameReview.Models.Game>
+﻿@model GameReview.ViewModels.HomeIndexViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -15,17 +15,17 @@
             <div class="col d-flex flex-column align-self-center">
                 <h1 class="text-white mt-3 mt-sm-0">GAMES & GAMERS ALL IN THE SAME PLACE</h1>
 
-                @Html.ActionLink("Sign Up!", "Register", "Account", null, new {@class = "boldFonts btn btn-block btn-primary align-content-center gen-button w-50 mt-3 ml-auto mr-auto ml-sm-0 mr-sm-0" })
+                @Html.ActionLink("Sign Up!", "Register", "Account", null, new { @class = "boldFonts btn btn-block btn-primary align-content-center gen-button w-50 mt-3 ml-auto mr-auto ml-sm-0 mr-sm-0" })
                 <h5 class="text-white mt-3">Sign up to join our community and make your first review</h5>
             </div>
             <div class="col-5 d-none d-sm-block">
                 <div class="jumbotron pt-2 pb-3 w-100" id="homeCarousel">
                     <div id="gameCarousel" class="container">
-                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1rft.jpg" class="m-auto ml-1 mr-1 img-fluid"/>
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1rft.jpg" class="m-auto ml-1 mr-1 img-fluid" />
 
-                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2edq.jpg" class="m-auto ml-1 mr-1 img-fluid"/>
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2edq.jpg" class="m-auto ml-1 mr-1 img-fluid" />
 
-                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2dto.jpg" class="m-auto ml-1 mr-1  img-fluid"/>
+                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2dto.jpg" class="m-auto ml-1 mr-1  img-fluid" />
                     </div>
                 </div>
             </div>
@@ -41,11 +41,11 @@
         <h2 class="text-white boldFonts">Top Rated</h2>
         <div class="line  w-50 ml-0 mt-0"></div>
         <h5 class="text-white m-1">The most popular games of all time as rated by our users. New games and reviews are added often so check back regularly to see what is the most current popular game.</h5>
-        @Html.ActionLink("MORE TOP RATED GAMES", "Register", "Account", null, new { id ="topRatedGamesBtn", @class = "boldFonts btn btn-block btn-primary align-content-center gen-button mt-3 mb-1 w-75 ml-auto mr-auto ml-sm-0 mr-sm-0" })
+        @Html.ActionLink("MORE TOP RATED GAMES", "Search", "Game", new { searchType = "topRated", searchFilter = "" }, new { id = "topRatedGamesBtn", @class = "boldFonts btn btn-block btn-primary align-content-center gen-button mt-3 mb-1 w-75 ml-auto mr-auto ml-sm-0 mr-sm-0" })
     </div>
     <div class="col-md-7 order-1 order-md-2">
         <div class="row">
-            @foreach (var game in Model)
+            @foreach (var game in Model.TopRatedGames)
             {
                 <div class="col-4">
                     <a href="@Url.Action("Details", "Game", new { id = game.Id})">
@@ -64,37 +64,14 @@
 <div class="row">
     <div class="col-md-8 order-2 order-md-1">
         <div class="row">
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1zht.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2fe8.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-          </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r77.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co2eq1.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1r0o.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1syk.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
-            <div class="col-6 col-md-3">
-                <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg" class="img-fluid mb-2 mt-3 game-thumbs"/>
-
-            </div>
+            @foreach (var game in Model.DiscoverGames)
+            {
+                <div class="col-6 col-md-3">
+                    <a href="@Url.Action("Details", "Game", new { id = game.Id})">
+                        <img alt="" src="@Url.Content(@game.CoverArtUrl)" class="img-fluid mb-2 mt-3 game-thumbs">
+                    </a>
+                </div>
+            }
         </div>
     </div>
     <div class="col-md-4 d-flex flex-column align-self-center p-1 order-1 order-md-2">
@@ -118,7 +95,7 @@
             <div class="col-md-7 d-flex align-items-center justify-content-center">
                 <div class="row w-100">
                     <div class="col d-flex justify-content-center">
-                        @Html.ActionLink("Sign Up!", "Register", "Account", null, new {@class = "boldFonts btn btn-block btn-primary align-self-center gen-button big-button w-75 mt-3"})
+                        @Html.ActionLink("Sign Up!", "Register", "Account", null, new { @class = "boldFonts btn btn-block btn-primary align-self-center gen-button big-button w-75 mt-3" })
                     </div>
                 </div>
             </div>

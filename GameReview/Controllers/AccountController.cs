@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GameReview.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GameReview.Controllers
 {

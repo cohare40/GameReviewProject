@@ -44,6 +44,8 @@ namespace GameReview.Models
 
         public IEnumerable<string> InvolvedCompanies{ get; set; }
 
+        public double AverageRating { get; set; }
+
 
     }
 }

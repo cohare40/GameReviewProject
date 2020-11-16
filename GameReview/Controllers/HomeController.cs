@@ -1,7 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Security;
 using GameReview.Models;
 using GameReview.Modules;
+using GameReview.ViewModels;
 
 namespace GameReview.Controllers
 {
@@ -20,26 +25,40 @@ namespace GameReview.Controllers
             var igdbService = new IGDBService();
 
             //Get list of ids of top rated games in db
-            var topRatedGameIds = gameService.GetTopGames();
+            var topRatedGameIds = await gameService.GetTopGamesAsync();
+            var topRatedGames = await igdbService.GetGamesIdAndPicAsync(topRatedGameIds);
 
-            var topRatedGames = await igdbService.GetTopRatedGamesAsync(topRatedGameIds);
+            foreach (var game in topRatedGames)
+            {
+                game.AverageRating = gameService.GetAverageRating(game.Id);
+            }
 
 
-            return View("Index",topRatedGames);
+            var allGameIdsInDb = gameService.GetGamesInDatabase().ToArray();
+
+            Random rnd = new Random();
+            HashSet<int> numbers = new HashSet<int>();
+            var discoverGamesIds = new List<int>();
+            while (numbers.Count < 8)
+                numbers.Add(rnd.Next(1, allGameIdsInDb.Length));
+
+            foreach (var num in numbers)
+                discoverGamesIds.Add(allGameIdsInDb[num]);
+            
+            var discoverGameItems = await igdbService.GetGamesIdAndPicAsync(discoverGamesIds);
+
+            var viewModel = new HomeIndexViewModel
+            {
+                TopRatedGames = topRatedGames.OrderByDescending(g => g.AverageRating)
+                    .Take(6),
+                DiscoverGames = discoverGameItems
+            };
+            Version vs = Environment.Version;
+            Response.Write(vs.ToString());
+
+            return View("Index", viewModel);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

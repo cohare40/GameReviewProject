@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using GameReview.Models;
 
 namespace GameReview.Modules
@@ -35,7 +36,8 @@ namespace GameReview.Modules
                 .Where(p => platformIds.Contains(p.ApiPlatformId))
                 .ToList();
         }
-
+        
+        //Gets the specified game's(by id) average rating by review scores
         public double GetAverageRating(int gameId)
         {
             return _context.Games
@@ -43,11 +45,12 @@ namespace GameReview.Modules
                     .AverageRating;
         }
 
-        public IEnumerable<int> GetTopGames()
+        public async Task<List<int>> GetTopGamesAsync()
         {
-            return _context.Games
+            return await _context.Games
                 .OrderByDescending(r => r.AverageRating)
-                .Select(g => g.GameIdentifier).Take(6).ToList();
+                .Select(g => g.GameIdentifier)
+                .ToListAsync();
         }
     }
 }

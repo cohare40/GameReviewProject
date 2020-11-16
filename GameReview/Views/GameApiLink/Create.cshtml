@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2 class="text-white">Add New Game</h2>
 
 
 <div class="row">
@@ -22,10 +22,10 @@
     </div>
 </div>
 <div id="loader" class="row">
-    <h1 class="text-white">LOADING</h1>
+    <h1 class="text-white text-center loading-texts">LOADING...</h1>
 </div>
 <div id="finisher" class="row">
-    <h1 class="text-white">DONE</h1>
+    <h1 class="text-white text-center loading-texts">ALL GAMES LOADED</h1>
 </div>
 
 
@@ -49,6 +49,7 @@
                             console.log(data);
                         } 
                         else {
+                            jQuery("#loader").hide();
                             jQuery("#finisher").show();
                         }
                     }
@@ -56,6 +57,7 @@
             }
 
             jQuery("#searchSubmit").click(function() {
+                pageNumber = 0;
                 jQuery("#finisher").hide();
                 jQuery("#gamesHolder").empty();
                 jQuery.ajax({

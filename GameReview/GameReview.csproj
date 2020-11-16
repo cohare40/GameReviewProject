@@ -318,6 +318,14 @@
     <Compile Include="Migrations\202009252041212_ChangeAverageRatingToColumn.Designer.cs">
       <DependentUpon>202009252041212_ChangeAverageRatingToColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011051425303_AddPlatformValues.cs" />
+    <Compile Include="Migrations\202011051425303_AddPlatformValues.Designer.cs">
+      <DependentUpon>202011051425303_AddPlatformValues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011151408559_SeedUsers.cs" />
+    <Compile Include="Migrations\202011151408559_SeedUsers.Designer.cs">
+      <DependentUpon>202011151408559_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Extensions\Extensions.cs" />
     <Compile Include="Modules\DbService.cs" />
@@ -330,6 +338,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Modules\IGDB.cs" />
     <Compile Include="Modules\IGDBService.cs" />
+    <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Review.cs" />
@@ -927,6 +936,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009252041212_ChangeAverageRatingToColumn.resx">
       <DependentUpon>202009252041212_ChangeAverageRatingToColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011051425303_AddPlatformValues.resx">
+      <DependentUpon>202011051425303_AddPlatformValues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011151408559_SeedUsers.resx">
+      <DependentUpon>202011151408559_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

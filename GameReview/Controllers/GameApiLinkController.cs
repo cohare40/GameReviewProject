@@ -2,11 +2,14 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using GameReview.Models;
 using GameReview.Modules;
 
+
 namespace GameReview.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class GameApiLinkController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -84,7 +87,7 @@ namespace GameReview.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,GameIdentifier")] GameApiLink gameApiLink)
+        public async Task<ActionResult> EditGameDetails([Bind(Include = "Id,GameIdentifier,Name")] GameApiLink gameApiLink)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +95,7 @@ namespace GameReview.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(gameApiLink);
+            return View("Edit", gameApiLink);
         }
 
         // GET: Games/Delete/5

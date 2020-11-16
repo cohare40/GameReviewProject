@@ -42,23 +42,22 @@ namespace GameReview.Controllers
         public async Task<ActionResult> SearchGameItemAsync(string searchFilter, string searchType, int pageNumber)
         {
             var gameService = new DbService();
-
             //get every id in db table
             //format to query api
-            var formattedString = string.Join(", ", gameService.GetGamesInDatabase());
+            var allGamesInDb = gameService.GetGamesInDatabase();
 
             var igdbService = new IGDBService();
             //returns list of games which match criteria in params
-            var gameList = await igdbService.GetSearchResultsAsync(formattedString, searchFilter, searchType);
+            var gameList = await igdbService.GetSearchResultsAsync(string.Join(", ", allGamesInDb), searchFilter, searchType);
 
-            var test = new List<GameItemViewModel>();
+            var gameSearchResults = new List<GameItemViewModel>();
             foreach (var game in gameList)
             {
-                test.Add(new GameItemViewModel(game, _context));
+                game.AverageRating = gameService.GetAverageRating(game.Id);
+                gameSearchResults.Add(new GameItemViewModel(game, _context));
             }
             
-
-            return PartialView("GameItem", test);
+            return PartialView("GameItem", gameSearchResults.OrderByDescending(g => g.Game.AverageRating));
         }
     }
 }
